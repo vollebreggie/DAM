@@ -1,0 +1,321 @@
+<div id="landing" class="page-header" data-parallax="true" style="background-image: url('./assets/img/woodWork.jpg');">
+    <div class="filter"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-profile" animateOnScroll animationName="fade-in-right">
+                    <div class="card-avatar">
+                        <a href="#pablo">
+                            <img class="img" src="../assets/img/dylan.jpg" />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-category">Architect</h6>
+                        <h4 class="card-title">Dylan Vollebregt</h4>
+                        <div class="card-description">
+                            <div class="row mt-4">
+                                <div class="col contact-description mb-1 d-flex justify-content-start">
+                                    My latest projects
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="landing-image-container col">
+                                    <img src="./assets/img/woodWork.jpg" class="landing-image">
+                                    <img src="./assets/img/woodWork.jpg" class="landing-image-shadow">
+                                </div>
+                                <div class="landing-image-container col">
+                                    <img src="./assets/img/woodWork-2.jpg" class="landing-image">
+                                    <img src="./assets/img/woodWork-2.jpg" class="landing-image-shadow">
+                                </div>
+                                <div class="landing-image-container col">
+                                    <img src="./assets/img/woodWork-3.jpg" class="landing-image">
+                                    <img src="./assets/img/woodWork-3.jpg" class="landing-image-shadow">
+                                </div>
+                            </div>
+                        </div>
+                        <a (click)="scroll('contact')" class="btn mt-4 btn-dark btn-round" style="color:white;">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col align-self-center ">
+                <div class="motto text-center">
+                    <h1 class="landing-title">DAM</h1>
+                    <h3>WoodWorking and stuff.</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-side-top" id="sideNav">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link landing-nav-item" [ngClass]="{'open': landing}" (click)="scroll('landing')">Landing</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link landing-nav-item" [ngClass]="{'open': products}" (click)="scroll('product-synopsys')">Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link landing-nav-item" [ngClass]="{'open': materials}" (click)="scroll('materials')">Materials</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link landing-nav-item" [ngClass]="{'open': reference}" (click)="scroll('reference')">Reference</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link landing-nav-item" [ngClass]="{'open': contact}" (click)="scroll('contact')">Contact</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="main">
+    <div class="main-card">
+        <section class="section" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" id="product-synopsys">
+            <div class="title">My Products</div>
+            <div class="product-container">
+                <div animateOnScroll animationName="fade-in-left" class="product-container-row row justify-content-center">
+                    <div class="product-image-container col-3">
+                        <img src="./assets/img/soroush-karimi.jpg" class="product-image">
+                        <img src="./assets/img/soroush-karimi.jpg" class="product-image-shadow">
+                    </div>
+                    <div class="product-text-right-container col-4">
+                        <div class="row product-tag">ENTERPRISE</div>
+                        <div class="row product-title">Autodesk looks to future of 3D printing with Project Escher</div>
+                        <div class="row product-description">Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses. Today, it’s moving to a subscription model. Yet its own business model disruption
+                            is only part of the story — and… </div>
+                        <div class="row product-customer">by Mike Vollebregt, 2 days ago</div>
+                    </div>
+                </div>
+                <div animateOnScroll animationName="fade-in-right" class="product-container-row row justify-content-center">
+                    <div class="product-text-left-container col-4">
+                        <div class="row product-tag">ENTERPRISE</div>
+                        <div class="row product-title">Autodesk looks to future of 3D printing with Project Escher</div>
+                        <div class="row product-description">Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses. Today, it’s moving to a subscription model. Yet its own business model disruption
+                            is only part of the story — and… </div>
+                        <div class="row product-customer">by Mike Vollebregt, 2 days ago</div>
+                    </div>
+                    <div class="product-image-container col-3">
+                        <img src="./assets/img/soroush-karimi.jpg" class="product-image">
+                        <img src="./assets/img/soroush-karimi.jpg" class="product-image-shadow">
+                    </div>
+                </div>
+                <div animateOnScroll animationName="fade-in-left" class="product-container-row row justify-content-center">
+                    <div class="product-image-container col-3">
+                        <img src="./assets/img/soroush-karimi.jpg" class="product-image">
+                        <img src="./assets/img/soroush-karimi.jpg" class="product-image-shadow">
+                    </div>
+                    <div class="product-text-right-container col-4">
+                        <div class="row product-tag">ENTERPRISE</div>
+                        <div class="row product-title">Autodesk looks to future of 3D printing with Project Escher</div>
+                        <div class="row product-description">Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses. Today, it’s moving to a subscription model. Yet its own business model disruption
+                            is only part of the story — and… </div>
+                        <div class="row product-customer">by Mike Vollebregt, 2 days ago</div>
+                    </div>
+                </div>
+            </div>
+            <hr class="col-8 mt-5">
+        </section>
+        <section class="section" id="materials">
+            <div class="title">Materials</div>
+            <div animateOnScroll animationName="fade-in-left" class="material-container justify-content-center row">
+                <div class="material-text-container col-3">Wood Materials</div>
+                <div class="material-synopsys-container col-4">
+                    <div class="row">
+                        <div class="material-image-container col">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        </div>
+                        <div class="material-image-container col">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        </div>
+                        <div class="material-image-container col">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="material-image-container col">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        </div>
+                        <div class="material-image-container col">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        </div>
+                        <div class="material-image-container col">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div animateOnScroll animationName="fade-in-right" class="material-container justify-content-center row">
+                <div class="material-synopsys-container col-4">
+                    <div class="row">
+                        <div class="material-image-container col">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        </div>
+                        <div class="material-image-container col">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        </div>
+                        <div class="material-image-container col">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="material-image-container col">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        </div>
+                        <div class="material-image-container col">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        </div>
+                        <div class="material-image-container col">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
+                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        </div>
+                    </div>
+                </div>
+                <div class="material-text-container col-3">Stone Materials</div>
+            </div>
+            <hr class="col-8 mt-5">
+        </section>
+        <section class="section" id="reference">
+
+            <div class="reference-section-title justify-content-center row">Our Clients Love Us</div>
+            <div class="reference-section-description justify-content-center row">You need more information? Check what other persons are saying about our product. They are very happy with their purchase.</div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-3" animateOnScroll animationName="fade-in-left">
+                    <div class="reference-card ">
+                        <div class="reference-card-quote">
+                            <i class="material-icons">format_quote</i>
+                        </div>
+                        <div class="reference-body-description">
+                            <div class="reference-card-description">
+                                Your products, all the kits that I have downloaded from your site and worked with are sooo cool! I love the color mixtures, cards... everything. Keep up the great work!
+                            </div>
+                        </div>
+                        <div class="reference-card-name">
+                            Alec Thompson
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="reference-image-container col">
+                                <img src="./assets/img/soroush-karimi.jpg" class="reference-image">
+                                <img src="./assets/img/soroush-karimi.jpg" class="reference-image-shadow">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+                    <div class="reference-card">
+                        <div class="reference-card-quote">
+                            <i class="material-icons">format_quote</i>
+                        </div>
+                        <div class="reference-body-description">
+                            <div class="reference-card-description">
+                                "Don't be scared of the truth because we need to restart the human foundation in truth. That's why I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is not so attractive"
+                            </div>
+                        </div>
+                        <div class="reference-card-name">
+                            Alec Thompson
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="reference-image-container col">
+                                <img src="./assets/img/soroush-karimi.jpg" class="reference-image">
+                                <img src="./assets/img/soroush-karimi.jpg" class="reference-image-shadow">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3" animateOnScroll animationName="fade-in-right">
+                    <div class="reference-card ">
+                        <div class="reference-card-quote">
+                            <i class="material-icons">format_quote</i>
+                        </div>
+                        <div class="reference-body-description">
+                            <div class="reference-card-description">
+                                Your products, all the kits that I have downloaded from your site and worked with are sooo cool! I love the color mixtures, cards... everything. Keep up the great work!
+                            </div>
+                        </div>
+                        <div class="reference-card-name">
+                            Alec Thompson
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="reference-image-container col">
+                                <img src="./assets/img/soroush-karimi.jpg" class="reference-image">
+                                <img src="./assets/img/soroush-karimi.jpg" class="reference-image-shadow">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+
+                <hr class="col-8 mt-5">
+            </div>
+        </section>
+        <section class="section" id="contact">
+            <div class="row justify-content-center mt-5">
+                <div class="col-4">
+                    <div class="contact-title">Get in Touch</div>
+                    <div class="contact-description">You need more information? Check what other persons are saying about our product. They are very happy with their purchase.</div>
+                    <div class="contact-location"><i class="material-icons">pin_drop</i> Find us at the office</div>
+                    <div class="contact-location-description">Buizerdstraat,<br /> nr. 62, 2665TG Bleiswijk,<br /> Netherlands</div>
+                    <div class="contact-info"><i class="material-icons">phone</i> Give us a ring</div>
+                    <div class="contact-info-description">Dylan Vollebregt<br /> +40 762 321 762 Mon - Fri,<br /> dylan.vollebregt@gmail.com</div>
+                </div>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-header">Contact Me</div>
+                        <div class="card-body">
+
+                            <form class="example-form">
+                                <div class="row mt-4">
+                                    <div class="col ">
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>First Name</mat-label>
+                                            <input matInput placeholder="Ex. Pizza" value="">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col">
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Last Name</mat-label>
+                                            <input matInput placeholder="" value="">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col">
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Email</mat-label>
+                                            <input matInput placeholder="" value="">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col">
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>Your Message</mat-label>
+                                            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="10" placeholder=""></textarea>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col d-flex justify-content-end">
+                                        <button type="button" class="btn btn-dark">Send Message</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
