@@ -1,0 +1,49 @@
+<div class="top"></div>
+<div class="title-list">
+    Landing
+</div>
+<div *ngIf="landing" class="item-list" (click)="click(landing, 'landing')"> {{landing.firstTitle}} </div>
+<div class="title-list">Products <button type="button" class="btn btn-primary right" (click)="create('product')">Create Product</button></div>
+<div *ngFor="let product of products">
+    <div class="row">
+        <div class="col-10">
+            <div class="item-list" (click)="click(product, 'product')"> € {{product.price}} - {{product.title}}</div>
+        </div>
+        <div class="col-2">
+            <div class="item-delete" (click)="deleteProduct(product.id)">X</div>
+        </div>
+    </div>
+</div>
+<div class="title-list">Materials <button type="button" class="btn btn-primary right" (click)="create('material')">Create Material</button></div>
+<div *ngFor="let material of materials">
+    <div class="row">
+        <div class="col-10">
+            <div class="item-list" (click)="click(material, 'material')">{{material.name}}</div>
+        </div>
+        <div class="col-2">
+            <div class="item-delete" (click)="deleteMaterial(material.id)">X</div>
+        </div>
+    </div>
+</div>
+<div class="title-list">References <button type="button" class="btn btn-primary right" (click)="create('reference')">Create Reference</button></div>
+<div *ngFor="let reference of references">
+    <div class="row">
+        <div class="col-10">
+            <div class="item-list" (click)="click(reference, 'reference')">{{reference.name}}</div>
+        </div>
+        <div class="col-2">
+            <div class="item-delete" (click)="deleteReference(reference.id)">X</div>
+        </div>
+    </div>
+</div>
+<div class="title-list">Blogs <button type="button" class="btn btn-primary right" (click)="create('blog')">Create Blog</button></div>
+<div *ngFor="let blog of blogs">
+    <div class="row">
+        <div class="col-10">
+            <div class="item-list" (click)="click(blog, 'blog')">{{blog.title}}</div>
+        </div>
+        <div class="col-2">
+            <div class="item-delete" (click)="deleteBlog(blog.id)">X</div>
+        </div>
+    </div>
+</div>

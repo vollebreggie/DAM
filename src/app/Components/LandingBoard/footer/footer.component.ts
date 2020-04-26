@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FooterService } from 'src/app/Services/FooterService';
 
 @Component({
   selector: 'app-footer',
@@ -6,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  date : Date = new Date();
+  date: Date = new Date();
+  show: boolean = true;
 
-  constructor() { }
+  constructor(private footerService: FooterService) {
+    footerService.showFooter.subscribe(s => {
+      this.show = s;
+    })
+  }
 
   ngOnInit() {
   }

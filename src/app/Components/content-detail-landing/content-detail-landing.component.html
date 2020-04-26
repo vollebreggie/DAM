@@ -1,0 +1,79 @@
+<form [formGroup]="contentForm">
+    <div class="col">
+        <div class="row">
+            <div class="col">
+                <div class="top"></div>
+                <div class="product-image-container image-input mb-3">
+                    <img [src]="url + imageSrc || './assets/img/example.jpg'" (click)="upload.click()" id="input-image" class="profile-card">
+                    <div class="row" *ngIf="products">
+                        <div class="landing-image-container col" (click)="openModal('custom-modal-1', products[0], 0)">
+                            <img [src]="url + products[0].image || './assets/img/example.jpg'" class="landing-image">
+                            <img [src]="url + products[0].image || './assets/img/example.jpg'" class="landing-image-shadow">
+                        </div>
+                        <div class="landing-image-container col" (click)="openModal('custom-modal-1', products[1], 1)">
+                            <img [src]="url + products[1].image || './assets/img/example.jpg'" class="landing-image">
+                            <img [src]="url + products[1].image || './assets/img/example.jpg'" class="landing-image-shadow">
+                        </div>
+                        <div class="landing-image-container col" (click)="openModal('custom-modal-1', products[2], 2)">
+                            <img [src]="url + products[2].image || './assets/img/example.jpg'" class="landing-image">
+                            <img [src]="url + products[2].image || './assets/img/example.jpg'" class="landing-image-shadow">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row upload-button">
+            <input type="file" class="image-input" #upload (change)="readURL($event);">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="firstName">FirstName</label>
+        <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': f.firstName.errors }" />
+        <div *ngIf="f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors.required">FirstName is required</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="secondName">SecondName</label>
+        <input type="text" formControlName="secondName" class="form-control" [ngClass]="{ 'is-invalid': f.secondName.errors }" />
+        <div *ngIf="f.secondName.errors" class="invalid-feedback">
+            <div *ngIf="f.secondName.errors.required">SecondName is required</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="firstTitle">FirstTitle</label>
+        <input type="text" formControlName="firstTitle" class="form-control" [ngClass]="{ 'is-invalid': f.firstTitle.errors }" />
+        <div *ngIf="f.firstTitle.errors" class="invalid-feedback">
+            <div *ngIf="f.firstTitle.errors.required">FirstTitle is required</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="secondTitle">SecondTitle</label>
+        <input type="text" formControlName="secondTitle" class="form-control" [ngClass]="{ 'is-invalid': f.secondTitle.errors }" />
+        <div *ngIf="f.secondTitle.errors" class="invalid-feedback">
+            <div *ngIf="f.secondTitle.errors.required">SecondTitle is required</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button type="button" class="btn btn-primary" (click)="onSubmit()">Save</button>
+    </div>
+
+    <jw-modal id="custom-modal-1">
+        <h2>Select which product should be on this position</h2>
+        <select class="browser-default custom-select" [ngModelOptions]="{standalone: true}" [(ngModel)]="selectedProduct" (change)="onChange($event.target.value)">
+            <option [ngValue]="product" *ngFor="let product of products">{{product.title}}</option>
+          </select>
+
+        <div *ngIf="selectedProduct" class="landing-image-container room col" style="cursor:default">
+            <img [src]="url + selectedProduct.image || './assets/img/example.jpg'" style="cursor:default" id="landing-selected" class="landing-image">
+            <img [src]="url + selectedProduct.image || './assets/img/example.jpg'" style="cursor:default" id="landing-selected" class="landing-image-shadow">
+        </div>
+        <button class="btn btn-primary" [disabled]="!dirty || !contentForm.dirty" (click)="save()"><div *ngIf="!dirty || !contentForm.dirty">Content up to date</div>  <div *ngIf="dirty || contentForm.dirty">Save</div></button>
+        <button class="btn btn-primary" (click)="closeModal('custom-modal-1');">Close</button>
+    </jw-modal>
+</form>

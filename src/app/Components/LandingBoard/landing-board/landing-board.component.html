@@ -3,33 +3,33 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <div class="card card-profile" animateOnScroll animationName="fade-in-right">
+                <div class="card card-profile" *ngIf="landing" animateOnScroll animationName="fade-in-right">
                     <div class="card-avatar">
                         <a href="#pablo">
-                            <img class="img" src="../assets/img/dylan.jpg" />
+                            <img class="img" [src]="landingImage" />
                         </a>
                     </div>
                     <div class="card-body">
-                        <h6 class="card-category">Architect</h6>
-                        <h4 class="card-title">Dylan Vollebregt</h4>
+                        <h6 class="card-category">{{ landing.firstName }}</h6>
+                        <h4 class="card-title">{{ landing.secondName }}</h4>
                         <div class="card-description">
                             <div class="row mt-4">
                                 <div class="col contact-description mb-1 d-flex justify-content-start">
-                                    My latest projects
+                                    Mijn laatste projecten
                                 </div>
                             </div>
-                            <div class="row mb-4">
-                                <div class="landing-image-container col">
-                                    <img src="./assets/img/woodWork.jpg" class="landing-image">
-                                    <img src="./assets/img/woodWork.jpg" class="landing-image-shadow">
+                            <div class="row mb-4" *ngIf="products">
+                                <div class="landing-image-container col" routerLink="/product/{{products[0].id}}">
+                                    <img [src]="imageUrl + products[0].image" class="landing-image">
+                                    <img [src]="imageUrl + products[0].image" class="landing-image-shadow">
                                 </div>
-                                <div class="landing-image-container col">
-                                    <img src="./assets/img/woodWork-2.jpg" class="landing-image">
-                                    <img src="./assets/img/woodWork-2.jpg" class="landing-image-shadow">
+                                <div class="landing-image-container col" routerLink="/product/{{products[1].id}}">
+                                    <img [src]="imageUrl + products[1].image" class="landing-image">
+                                    <img [src]="imageUrl + products[1].image" class="landing-image-shadow">
                                 </div>
-                                <div class="landing-image-container col">
-                                    <img src="./assets/img/woodWork-3.jpg" class="landing-image">
-                                    <img src="./assets/img/woodWork-3.jpg" class="landing-image-shadow">
+                                <div class="landing-image-container col" routerLink="/product/{{products[2].id}}">
+                                    <img [src]="imageUrl + products[2].image" class="landing-image">
+                                    <img [src]="imageUrl + products[2].image" class="landing-image-shadow">
                                 </div>
                             </div>
                         </div>
@@ -38,9 +38,9 @@
                 </div>
             </div>
             <div class="col align-self-center ">
-                <div class="motto text-center">
-                    <h1 class="landing-title">DAM</h1>
-                    <h3>WoodWorking and stuff.</h3>
+                <div class="motto text-center" *ngIf="landing">
+                    <h1 class="landing-title">{{ landing.firstTitle }}</h1>
+                    <h3>{{ landing.secondTitle }}</h3>
                 </div>
             </div>
         </div>
@@ -50,19 +50,19 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link landing-nav-item" [ngClass]="{'open': landing}" (click)="scroll('landing')">Landing</a>
+                <a class="nav-link landing-nav-item" [ngClass]="{'open': landingScroll}" (click)="scroll('landing')">Landing</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link landing-nav-item" [ngClass]="{'open': products}" (click)="scroll('product-synopsys')">Products</a>
+                <a class="nav-link landing-nav-item" [ngClass]="{'open': productsScroll }" (click)="scroll('product-synopsys')">Producten</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link landing-nav-item" [ngClass]="{'open': materials}" (click)="scroll('materials')">Materials</a>
+                <a class="nav-link landing-nav-item" [ngClass]="{'open': materialsScroll }" (click)="scroll('materials')">Materialen</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link landing-nav-item" [ngClass]="{'open': reference}" (click)="scroll('reference')">Reference</a>
+                <a class="nav-link landing-nav-item" [ngClass]="{'open': referenceScroll }" (click)="scroll('reference')">Referenties</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link landing-nav-item" [ngClass]="{'open': contact}" (click)="scroll('contact')">Contact</a>
+                <a class="nav-link landing-nav-item" [ngClass]="{'open': contactScroll }" (click)="scroll('contact')">Contact</a>
             </li>
         </ul>
     </div>
@@ -70,186 +70,190 @@
 <div class="main">
     <div class="main-card">
         <section class="section" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" id="product-synopsys">
-            <div class="title">My Products</div>
-            <div class="product-container">
-                <div animateOnScroll animationName="fade-in-left" class="product-container-row row justify-content-center">
+            <div class="title">Mijn Producten</div>
+            <div class="product-container" *ngIf="products">
+                <div animateOnScroll animationName="fade-in-left" routerLink="/product/{{products[0].id}}" *ngIf="products" class="product-container-row row justify-content-center clicky">
                     <div class="product-image-container col-3">
-                        <img src="./assets/img/soroush-karimi.jpg" class="product-image">
-                        <img src="./assets/img/soroush-karimi.jpg" class="product-image-shadow">
+                        <img [src]="imageUrl + products[0].image" class="product-image">
+                        <img [src]="imageUrl + products[0].image" class="product-image-shadow">
                     </div>
-                    <div class="product-text-right-container col-4">
-                        <div class="row product-tag">ENTERPRISE</div>
-                        <div class="row product-title">Autodesk looks to future of 3D printing with Project Escher</div>
-                        <div class="row product-description">Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses. Today, it’s moving to a subscription model. Yet its own business model disruption
-                            is only part of the story — and… </div>
-                        <div class="row product-customer">by Mike Vollebregt, 2 days ago</div>
+                    <div class="product-text-right-container col-4" *ngIf="products[0]">
+                        <div class="row product-tag">{{ products[0].category.name }}</div>
+                        <div class="row product-title">{{ products[0].title }}</div>
+                        <div class="row product-description">{{ products[0].description }}</div>
+                        <div class="row product-customer">By {{ landing.firstName }}, {{ products[0].updated | timeAgo }}</div>
                     </div>
                 </div>
-                <div animateOnScroll animationName="fade-in-right" class="product-container-row row justify-content-center">
-                    <div class="product-text-left-container col-4">
-                        <div class="row product-tag">ENTERPRISE</div>
-                        <div class="row product-title">Autodesk looks to future of 3D printing with Project Escher</div>
-                        <div class="row product-description">Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses. Today, it’s moving to a subscription model. Yet its own business model disruption
-                            is only part of the story — and… </div>
-                        <div class="row product-customer">by Mike Vollebregt, 2 days ago</div>
+                <div animateOnScroll animationName="fade-in-right" routerLink="/product/{{products[1].id}}" *ngIf="products" class="product-container-row row justify-content-center clicky">
+                    <div class="product-text-left-container col-4" *ngIf="products[1]">
+                        <div class="row product-tag">{{ products[1].category.name }}</div>
+                        <div class="row product-title">{{ products[1].title }}</div>
+                        <div class="row product-description">{{ products[1].description }} </div>
+                        <div class="row product-customer">By {{ landing.firstName }}, {{ products[1].updated | timeAgo }}</div>
                     </div>
-                    <div class="product-image-container col-3">
-                        <img src="./assets/img/soroush-karimi.jpg" class="product-image">
-                        <img src="./assets/img/soroush-karimi.jpg" class="product-image-shadow">
+                    <div class="product-image-container custom-left col-3">
+                        <img [src]="imageUrl + products[1].image" class="product-image">
+                        <img [src]="imageUrl + products[1].image" class="product-image-shadow">
                     </div>
                 </div>
-                <div animateOnScroll animationName="fade-in-left" class="product-container-row row justify-content-center">
+                <div animateOnScroll animationName="fade-in-left" *ngIf="products" routerLink="/product/{{products[1].id}}" class="product-container-row row justify-content-center clicky">
                     <div class="product-image-container col-3">
-                        <img src="./assets/img/soroush-karimi.jpg" class="product-image">
-                        <img src="./assets/img/soroush-karimi.jpg" class="product-image-shadow">
+                        <img [src]="imageUrl + products[2].image" class="product-image">
+                        <img [src]="imageUrl + products[2].image" class="product-image-shadow">
                     </div>
-                    <div class="product-text-right-container col-4">
-                        <div class="row product-tag">ENTERPRISE</div>
-                        <div class="row product-title">Autodesk looks to future of 3D printing with Project Escher</div>
-                        <div class="row product-description">Like so many organizations these days, Autodesk is a company in transition. It was until recently a traditional boxed software company selling licenses. Today, it’s moving to a subscription model. Yet its own business model disruption
-                            is only part of the story — and… </div>
-                        <div class="row product-customer">by Mike Vollebregt, 2 days ago</div>
+                    <div class="product-text-right-container col-4" *ngIf="products[2]">
+                        <div class="row product-tag">{{ products[2].category.name }}</div>
+                        <div class="row product-title">{{ products[2].title }}</div>
+                        <div class="row product-description">{{ products[2].description }} </div>
+                        <div class="row product-customer">By {{ landing.firstName }}, {{ products[2].updated | timeAgo }}</div>
                     </div>
                 </div>
             </div>
             <hr class="col-8 mt-5">
         </section>
         <section class="section" id="materials">
-            <div class="title">Materials</div>
-            <div animateOnScroll animationName="fade-in-left" class="material-container justify-content-center row">
-                <div class="material-text-container col-3">Wood Materials</div>
+            <div class="title">Materialen</div>
+            <div animateOnScroll animationName="fade-in-left" *ngIf="woodMaterials" class="material-container justify-content-center row">
+                <div class="material-text-container col-3">
+                    <div class="material-title">{{ woodTitle }}</div>
+                    <div class="material-description">{{ woodMaterial }}</div>
+                </div>
+
                 <div class="material-synopsys-container col-4">
                     <div class="row">
-                        <div class="material-image-container col">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        <div class="material-image-container col" *ngIf="woodMaterials[0]" (mouseenter)="onHoverWoodByObject(woodMaterials[0])" (mouseleave)="onHoverWood('')">
+                            <img [src]="imageUrl + woodMaterials[0].image" class="material-image">
+                            <img [src]="imageUrl + woodMaterials[0].image" class="material-image-shadow">
                         </div>
-                        <div class="material-image-container col">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        <div class="material-image-container col" *ngIf="woodMaterials[1]" (mouseenter)="onHoverWoodByObject(woodMaterials[1])" (mouseleave)="onHoverWood('')">
+                            <img [src]="imageUrl + woodMaterials[1].image" class="material-image">
+                            <img [src]="imageUrl + woodMaterials[1].image" class="material-image-shadow">
                         </div>
-                        <div class="material-image-container col">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        <div class="material-image-container col" *ngIf="woodMaterials[2]" (mouseenter)="onHoverWoodByObject(woodMaterials[2])" (mouseleave)="onHoverWood('')">
+                            <img [src]="imageUrl + woodMaterials[2].image" class="material-image">
+                            <img [src]="imageUrl + woodMaterials[2].image" class="material-image-shadow">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="material-image-container col">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        <div class="material-image-container col" *ngIf="woodMaterials[3]" (mouseenter)="onHoverWoodByObject(woodMaterials[3])" (mouseleave)="onHoverWood('')">
+                            <img [src]="imageUrl + woodMaterials[3].image" class="material-image">
+                            <img [src]="imageUrl + woodMaterials[3].image" class="material-image-shadow">
                         </div>
-                        <div class="material-image-container col">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        <div class="material-image-container col" *ngIf="woodMaterials[4]" (mouseenter)="onHoverWoodByObject(woodMaterials[4])" (mouseleave)="onHoverWood('')">
+                            <img [src]="imageUrl + woodMaterials[4].image" class="material-image">
+                            <img [src]="imageUrl + woodMaterials[4].image" class="material-image-shadow">
                         </div>
-                        <div class="material-image-container col">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        <div class="material-image-container col" *ngIf="woodMaterials[5]" (mouseenter)="onHoverWoodByObject(woodMaterials[5])" (mouseleave)="onHoverWood('')">
+                            <img [src]="imageUrl + woodMaterials[5].image" class="material-image">
+                            <img [src]="imageUrl + woodMaterials[5].image" class="material-image-shadow">
                         </div>
                     </div>
                 </div>
             </div>
-            <div animateOnScroll animationName="fade-in-right" class="material-container justify-content-center row">
+            <div animateOnScroll animationName="fade-in-right" *ngIf="stoneMaterials" class="material-container justify-content-center row">
                 <div class="material-synopsys-container col-4">
                     <div class="row">
-                        <div class="material-image-container col">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        <div class="material-image-container col" *ngIf="stoneMaterials[0]" (mouseenter)="onHoverStoneByObject(stoneMaterials[0])" (mouseleave)="onStoneWood('')">
+                            <img [src]="imageUrl + stoneMaterials[0].image" class="material-image">
+                            <img [src]="imageUrl + stoneMaterials[0].image" class="material-image-shadow">
                         </div>
-                        <div class="material-image-container col">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        <div class="material-image-container col" *ngIf="stoneMaterials[1]" (mouseenter)="onHoverStoneByObject(stoneMaterials[0])" (mouseleave)="onStoneWood('')">
+                            <img [src]="imageUrl + stoneMaterials[1].image" class="material-image">
+                            <img [src]="imageUrl + stoneMaterials[1].image" class="material-image-shadow">
                         </div>
-                        <div class="material-image-container col">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        <div class="material-image-container col" *ngIf="stoneMaterials[2]" (mouseenter)="onHoverStoneByObject(stoneMaterials[0])" (mouseleave)="onStoneWood('')">
+                            <img [src]="imageUrl + stoneMaterials[2].image" class="material-image">
+                            <img [src]="imageUrl + stoneMaterials[2].image" class="material-image-shadow">
                         </div>
                     </div>
                     <div class="row">
-                        <div class="material-image-container col">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        <div class="material-image-container col" *ngIf="stoneMaterials[3]" (mouseenter)="onHoverStoneByObject(stoneMaterials[0])" (mouseleave)="onStoneWood('')">
+                            <img [src]="imageUrl + stoneMaterials[2].image" class="material-image">
+                            <img [src]="imageUrl + stoneMaterials[2].image" class="material-image-shadow">
                         </div>
-                        <div class="material-image-container col">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        <div class="material-image-container col" *ngIf="stoneMaterials[4]" (mouseenter)="onHoverStoneByObject(stoneMaterials[0])" (mouseleave)="onStoneWood('')">
+                            <img [src]="imageUrl + stoneMaterials[2].image" class="material-image">
+                            <img [src]="imageUrl + stoneMaterials[2].image" class="material-image-shadow">
                         </div>
-                        <div class="material-image-container col">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image">
-                            <img src="./assets/img/soroush-karimi.jpg" class="material-image-shadow">
+                        <div class="material-image-container col" *ngIf="stoneMaterials[5]" (mouseenter)="onHoverStoneByObject(stoneMaterials[0])" (mouseleave)="onStoneWood('')">
+                            <img [src]="imageUrl + stoneMaterials[2].image" class="material-image">
+                            <img [src]="imageUrl + stoneMaterials[2].image" class="material-image-shadow">
                         </div>
                     </div>
                 </div>
-                <div class="material-text-container col-3">Stone Materials</div>
+                <div class="material-text-container col-3">
+                    <div class="material-title">{{stoneTitle}}</div>
+                    <div class="material-description">{{stoneMaterial}}</div>
+                </div>
             </div>
             <hr class="col-8 mt-5">
         </section>
-        <section class="section" id="reference">
+        <section class="section" id="reference" *ngIf="references">
 
             <div class="reference-section-title justify-content-center row">Our Clients Love Us</div>
             <div class="reference-section-description justify-content-center row">You need more information? Check what other persons are saying about our product. They are very happy with their purchase.</div>
 
             <div class="row justify-content-center">
                 <div class="col-md-3" animateOnScroll animationName="fade-in-left">
-                    <div class="reference-card ">
+                    <div class="reference-card" *ngIf="references[0]">
                         <div class="reference-card-quote">
                             <i class="material-icons">format_quote</i>
                         </div>
                         <div class="reference-body-description">
                             <div class="reference-card-description">
-                                Your products, all the kits that I have downloaded from your site and worked with are sooo cool! I love the color mixtures, cards... everything. Keep up the great work!
+                                {{ references[0].message}}
                             </div>
                         </div>
                         <div class="reference-card-name">
-                            Alec Thompson
+                            {{ references[0].name}}
                         </div>
                         <div class="row justify-content-center">
                             <div class="reference-image-container col">
-                                <img src="./assets/img/soroush-karimi.jpg" class="reference-image">
-                                <img src="./assets/img/soroush-karimi.jpg" class="reference-image-shadow">
+                                <img [src]="imageUrl + references[0].image" class="reference-image">
+                                <img [src]="imageUrl + references[0].image" class="reference-image-shadow">
                             </div>
                         </div>
                     </div>
 
                 </div>
                 <div class="col-md-3">
-                    <div class="reference-card">
+                    <div class="reference-card" *ngIf="references[1]">
                         <div class="reference-card-quote">
                             <i class="material-icons">format_quote</i>
                         </div>
                         <div class="reference-body-description">
                             <div class="reference-card-description">
-                                "Don't be scared of the truth because we need to restart the human foundation in truth. That's why I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is not so attractive"
+                                {{ references[1].message}}
                             </div>
                         </div>
                         <div class="reference-card-name">
-                            Alec Thompson
+                            {{ references[1].name}}
                         </div>
                         <div class="row justify-content-center">
                             <div class="reference-image-container col">
-                                <img src="./assets/img/soroush-karimi.jpg" class="reference-image">
-                                <img src="./assets/img/soroush-karimi.jpg" class="reference-image-shadow">
+                                <img [src]="imageUrl + references[1].image" class="reference-image">
+                                <img [src]="imageUrl + references[1].image" class="reference-image-shadow">
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3" animateOnScroll animationName="fade-in-right">
+                <div class="col-md-3" animateOnScroll animationName="fade-in-right" *ngIf="references[2]">
                     <div class="reference-card ">
                         <div class="reference-card-quote">
                             <i class="material-icons">format_quote</i>
                         </div>
                         <div class="reference-body-description">
                             <div class="reference-card-description">
-                                Your products, all the kits that I have downloaded from your site and worked with are sooo cool! I love the color mixtures, cards... everything. Keep up the great work!
+                                {{ references[2].message}}
                             </div>
                         </div>
                         <div class="reference-card-name">
-                            Alec Thompson
+                            {{ references[2].name}}
                         </div>
                         <div class="row justify-content-center">
                             <div class="reference-image-container col">
-                                <img src="./assets/img/soroush-karimi.jpg" class="reference-image">
-                                <img src="./assets/img/soroush-karimi.jpg" class="reference-image-shadow">
+                                <img [src]="imageUrl + references[2].image" class="reference-image">
+                                <img [src]="imageUrl + references[2].image" class="reference-image-shadow">
                             </div>
                         </div>
                     </div>

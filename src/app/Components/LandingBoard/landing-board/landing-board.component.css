@@ -1,0 +1,109 @@
+#sideNav .navbar-nav .nav-item .nav-link {
+    background: #343a40;
+    opacity: 0.9;
+}
+
+.product-container-row {
+    opacity: 0;
+    margin-top: 60px;
+}
+
+.material-text-container {
+    text-align: center;
+}
+
+.clicky {
+    cursor: pointer;
+}
+
+.material-title {
+    color: #3c4858;
+    text-decoration: none;
+    font-size: 1.5625rem;
+    line-height: 1.4em;
+    text-align: start;
+    font-weight: 700;
+    font-family: Roboto Slab, Times New Roman, serif;
+    margin-bottom: 10px;
+}
+
+.material-description {
+    color: #999;
+    text-align: start;
+    font-size: 14px;
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+}
+
+@media (max-width: 1600px) {
+    .material-image {
+        width: 130px;
+        height: 130px;
+    }
+    .material-image-shadow {
+        width: 130px;
+        height: 130px;
+    }
+}
+
+@media (max-width: 800px) {
+    .product-container-row [class*="col-"] {
+        width: 80%;
+        max-width: none;
+        flex: none;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    #contact [class*="col-"] {
+        width: 80%;
+        max-width: none;
+        flex: none;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .navbar {
+        padding: 0px;
+    }
+    .section {
+        padding: 0px;
+    }
+    .main-card {
+        top: 0px;
+        box-shadow: none;
+        max-width: none;
+    }
+    section.section {
+        padding-top: 0px !important;
+        padding-bottom: 0px !important;
+    }
+    .product-container-row {
+        margin-top: 0px;
+    }
+    .product-image-container {
+        margin-bottom: 40px;
+    }
+    .product-text-left-container {
+        display: none;
+    }
+    .product-text-right-container {
+        margin-left: 0px;
+        margin-bottom: 30px;
+    }
+    #materials {
+        display: none;
+    }
+    #reference {
+        display: none;
+    }
+    .custom-left {
+        display: none;
+    }
+    /* .product-container-row .row {
+        display: none;
+        margin-left: none;
+        margin-right: none;
+    } */
+    .contact-info-description {
+        margin-bottom: 50px;
+    }
+}

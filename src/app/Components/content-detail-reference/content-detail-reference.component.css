@@ -1,0 +1,16 @@
+.image-input {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.reference-image-container {
+    cursor: pointer;
+}
+
+.top {
+    height: 200px;
+}
+
+.upload-button {
+    visibility: hidden;
+}

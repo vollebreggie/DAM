@@ -1,0 +1,24 @@
+<div id="landing" class="page-header" data-parallax="true" style="background-image: url('./assets/img/antoine-barres.jpg');">
+    <div class="filter"></div>
+    <div class="container">
+        <div class="row justify-content-center" *ngIf="product">
+            <div class="col-12 card-product">
+                <div class="row justify-content-center mt-5">
+                    <div class="col-6 product-image-container ">
+                        <img [src]="imageUrl + product.image " class="product-image ">
+                        <img [src]="imageUrl + product.image " class="product-image-shadow ">
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-3 ">
+                    <div class="product-tags ">{{ product.category.name }}</div>
+                </div>
+                <div class="row justify-content-center mt-2 ">
+                    <div class="product-title ">{{ product.title}}</div>
+                </div>
+                <div class="row justify-content-center mt-2 ">
+                    <div class="product-description ">{{ product.description }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,24 +1,67 @@
-<div id="landing" class="page-header" data-parallax="true" style="background-image: url('./assets/img/woodWork.jpg');">
+<div id="landing" class="page-header" data-parallax="true" style="background-image: url('./assets/img/woodWork-2.jpg');">
     <div class="filter"></div>
     <div class="container">
-        <section class="section" id="contact" style="z-index: 4; margin-top:30%; border-top-left-radius: 10px; border-top-right-radius: 10px;">
-            <div class="row justify-content-center">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-profile" *ngIf="landing" animateOnScroll animationName="fade-in-right">
+                    <div class="card-avatar">
+                        <a href="#pablo">
+                            <img class="img" [src]="imageUrl + landing.profilePicture" />
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-category">{{ landing.firstName }}</h6>
+                        <h4 class="card-title">{{ landing.secondName }}</h4>
+                        <div class="card-description">
+                            <div class="row mt-4">
+                                <div class="col contact-description mb-1 d-flex justify-content-start">
+                                    Mijn laatste blogs
+                                </div>
+                            </div>
+                            <div class="row mb-4" *ngIf="blogs">
+                                <div class="landing-image-container col">
+                                    <img [src]="imageUrl + blogs[0].image" class="landing-image">
+                                    <img [src]="imageUrl + blogs[0].image" class="landing-image-shadow">
+                                </div>
+                                <div class="landing-image-container col">
+                                    <img [src]="imageUrl + blogs[1].image" class="landing-image">
+                                    <img [src]="imageUrl + blogs[1].image" class="landing-image-shadow">
+                                </div>
+                                <div class="landing-image-container col">
+                                    <img [src]="imageUrl + blogs[2].image" class="landing-image">
+                                    <img [src]="imageUrl + blogs[2].image" class="landing-image-shadow">
+                                </div>
+                            </div>
+                        </div>
+                        <a [routerLink]="['/contact']" class="btn mt-4 btn-dark btn-round" style="color:white;">Contact</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col align-self-center ">
+                <div class="motto text-center" *ngIf="landing">
+                    <h1 class="landing-title">Blog</h1>
+                    <!-- <h3>{{ landing.secondTitle }}</h3> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main">
+    <div class="main-card">
+        <section class="section" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" id="product-synopsys">
+            <div class="row justify-content-center" *ngFor="let blog of blogs">
                 <div class="col-6">
                     <div class="row justify-content-center mt-5">
-                        <div class="blog-image-container">
-                            <img src="./assets/img/soroush-karimi.jpg" class="blog-image">
-                            <img src="./assets/img/soroush-karimi.jpg" class="blog-image-shadow">
+                        <div class="product-image-container">
+                            <img [src]="imageUrl + blog.image" class="product-image">
+                            <img [src]="imageUrl + blog.image" class="product-image-shadow">
                         </div>
                     </div>
-                    <div class="row justify-content-center mt-3">
-                        <div class="blog-tags">Fashion</div>
+                    <div class="row justify-content-center mt-2">
+                        <div class="product-title">{{ blog.title}}</div>
                     </div>
                     <div class="row justify-content-center mt-2">
-                        <div class="blog-title">Autodesk looks to future of 3D</div>
-                    </div>
-                    <div class="row justify-content-center mt-2">
-                        <div class="blog-description">Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is too high for the beams and angle of the ceiling I also wanted
-                            to point out that it’s the first album to go number 1 off of streaming.</div>
+                        <div class="product-description">{{ blog.description }}</div>
                     </div>
                 </div>
             </div>

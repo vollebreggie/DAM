@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-3">
+        <content-list [(materials)]="materials" [(blogs)]="blogs" [(landing)]="landingList" [(references)]="references" [(products)]="products"></content-list>
+    </div>
+    <div class="col">
+        <content-detail-product *ngIf="product" [(product)]="product"></content-detail-product>
+        <content-detail-landing *ngIf="landing" [(landing)]="landing"></content-detail-landing>
+        <content-detail-material *ngIf="material" [(material)]="material"></content-detail-material>
+        <content-detail-reference *ngIf="reference" [(reference)]="reference"></content-detail-reference>
+        <content-detail-blog *ngIf="blog" [(blog)]="blog"></content-detail-blog>
+    </div>
+</div>

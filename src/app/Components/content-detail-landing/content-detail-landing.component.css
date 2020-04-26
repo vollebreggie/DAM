@@ -1,0 +1,20 @@
+.profile-card {
+    max-width: 120px;
+    max-height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.top {
+    height: 200px;
+}
+
+.upload-button {
+    visibility: hidden;
+}
+
+.room {
+    margin: 20px;
+}
