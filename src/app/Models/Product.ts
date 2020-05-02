@@ -1,5 +1,6 @@
 import { Category } from './Category';
 import { Type } from './Enums/Type';
+import { ImageProduct } from './ImageProduct';
 
 export class Product {
     id: number;
@@ -8,6 +9,7 @@ export class Product {
     price: number;
     image: string;
     category: Category;
+    images: ImageProduct[];
     type: Type;
 
     constructor(id: number = 0, title: string = "", description: string,

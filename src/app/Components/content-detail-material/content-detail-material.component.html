@@ -29,7 +29,7 @@
     <div class="form-group">
         <label for="describtion">Description</label>
         <textarea formControlName="description" class="form-control" row="6 " [ngClass]="{ 'is-invalid':f.description.errors }"></textarea>
-        <div *ngIf="f.describtion.errors" class="invalid-feedback">
+        <div *ngIf="f.description.errors" class="invalid-feedback">
             <div *ngIf="f.description.errors.required">Description is required</div>
         </div>
     </div>

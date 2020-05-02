@@ -5,6 +5,7 @@ import { DAMService } from 'src/app/Services/DAMService';
 import { Type } from 'src/app/Models/Enums/Type';
 import { environment } from 'src/environments/environment';
 import { Category } from 'src/app/Models/Category';
+import { ImageProduct } from 'src/app/Models/ImageProduct';
 
 @Component({
   selector: 'content-detail-product',
@@ -17,16 +18,12 @@ export class ContentDetailProductComponent implements OnInit {
   contentForm: FormGroup;
   @Input() product: Product;
   categories: Category[];
-  formData: FormData = new FormData();
+  formData: FormData = null;
   url: string = environment.apiUrl + "images/";
   dirty: boolean = false;
   selectedCategory: Category;
 
   constructor(private formBuilder: FormBuilder, private damService: DAMService) {
-
-
-
-    //this.selectedCategory = this.product.category;
 
     this.damService.current.subscribe(c => {
       if (c != null) {
@@ -36,7 +33,7 @@ export class ContentDetailProductComponent implements OnInit {
             this.product = c;
             this.damService.getCategories().subscribe(r => {
               this.categories = r.data;
-              if (this.product.category) {
+              if (this.product.category != null) {
                 this.selectedCategory = this.categories.find(c => c.id == this.product.category.id);
               } else {
                 this.selectedCategory = this.categories[0];
@@ -74,6 +71,7 @@ export class ContentDetailProductComponent implements OnInit {
       var reader = new FileReader();
       this.dirty = true;
       this.contentForm.markAsDirty();
+      this.formData = new FormData();
       this.formData.append('file', input.target.files[0], input.target.files[0].name);
       reader.onload = (e: any) => {
         (<HTMLImageElement>document.getElementById('input-image')).src = e.target.result
@@ -95,9 +93,17 @@ export class ContentDetailProductComponent implements OnInit {
 
     this.contentForm.markAsPristine();
     let product = new Product(this.product.id, this.f.title.value, this.f.description.value, this.f.price.value, this.imageSrc, this.selectedCategory);
-    if (this.dirty) {
+    if (this.dirty && this.formData != null) {
       this.damService.uploadImage(this.formData, "product").subscribe(response => {
-        product.image = response.text;
+        
+        let imageProduct: ImageProduct = {
+          id: 0,
+          title: "image",
+          image: response.text
+        };
+
+        this.formData = null;
+        product.images.push(imageProduct);
         this.damService.updateProduct(product).subscribe(response => {
           this.product = response.data;
 

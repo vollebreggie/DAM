@@ -5,8 +5,7 @@
 export const environment = {
   production: false,
   environmentName: 'Development',
-  apiUrl: 'http://localhost:59206/',
-  webSocketUrl: 'ws://localhost:59206//tv',
+  apiUrl: 'https://kataskopos.nl/'
 };
 
 /*
