@@ -7,22 +7,21 @@ export class Product {
     title: string;
     description: string;
     price: number;
-    image: string;
     category: Category;
     images: ImageProduct[];
     type: Type;
+    available: boolean;
 
     constructor(id: number = 0, title: string = "", description: string,
-        price: number, image: string, category: Category) { 
+        price: number, images: ImageProduct[], category: Category, available: boolean) { 
         this.id = id;
         this.title = title;
         this.description = description;
         this.price = price;
-        this.image = image;
+        this.images = images;
         this.category = category;
         this.type = Type.Product;
+        this.available = available;
     }
-
-   
 
 }

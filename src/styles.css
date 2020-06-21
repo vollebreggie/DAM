@@ -1,6 +1,8 @@
 @import '~material-design-icons/iconfont/material-icons.css';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
 section.section {
     padding-top: 5rem !important;
     padding-bottom: 5rem !important;
@@ -41,6 +43,7 @@ section.section .resume-item .resume-date {
     padding: 0;
     z-index: 1;
 }
+
 
 .product-image {
     position: absolute;
@@ -119,6 +122,7 @@ section.section .resume-item .resume-date {
     color: #999;
     font-size: 14px;
     margin-bottom: 10px;
+    word-break: break-all;
 }
 
 .product-customer {
@@ -328,9 +332,11 @@ section.section .resume-item .resume-date {
     width: 100px;
     height: 100px;
     z-index: 1;
+
 }
 
 .landing-image {
+    object-fit: cover;
     left: 5px;
     position: absolute;
     width: 100px;

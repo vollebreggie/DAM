@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Product } from 'src/app/Models/Product';
 import { DAMService } from 'src/app/Services/DAMService';
@@ -22,6 +22,10 @@ export class ContentDetailProductComponent implements OnInit {
   url: string = environment.apiUrl + "images/";
   dirty: boolean = false;
   selectedCategory: Category;
+  selectedAvailable: string = "Available";
+  images: string[];
+
+  availables: string[] = ["Available", "Not Available"];
 
   constructor(private formBuilder: FormBuilder, private damService: DAMService) {
 
@@ -29,7 +33,7 @@ export class ContentDetailProductComponent implements OnInit {
       if (c != null) {
         switch (c.type) {
           case Type.Product:
-
+            console.log(c);
             this.product = c;
             this.damService.getCategories().subscribe(r => {
               this.categories = r.data;
@@ -39,13 +43,22 @@ export class ContentDetailProductComponent implements OnInit {
                 this.selectedCategory = this.categories[0];
               }
             });
-            
-            this.imageSrc = this.product.image;
+
+            if (!this.product.images) {
+              this.product.images = [];
+            }
+            this.images = this.product.images.map(i => i.image);
             this.contentForm = this.formBuilder.group({
               title: [this.product.title, Validators.required],
               description: [this.product.description, Validators.required],
               price: [this.product.price, Validators.required]
             });
+          
+            if(this.product.available) {
+              this.selectedAvailable = "Available";
+            }else {
+              this.selectedAvailable = "Not Available";
+            }
 
             if (c.id == 0) {
               this.contentForm.markAsDirty();
@@ -66,6 +79,17 @@ export class ContentDetailProductComponent implements OnInit {
     });
   }
 
+  removeImage(index) {
+    if (this.images.length == 1) {
+      return;
+    }
+
+    (<HTMLElement>document.getElementById('image-' + 0)).classList.add("active");
+
+    this.contentForm.markAsDirty();
+    this.images.splice(index, 1);
+  }
+
   readURL(input: HTMLInputEvent): void {
     if (input.target.files && input.target.files[0]) {
       var reader = new FileReader();
@@ -74,7 +98,10 @@ export class ContentDetailProductComponent implements OnInit {
       this.formData = new FormData();
       this.formData.append('file', input.target.files[0], input.target.files[0].name);
       reader.onload = (e: any) => {
-        (<HTMLImageElement>document.getElementById('input-image')).src = e.target.result
+        this.damService.uploadImage(this.formData, "product").subscribe(response => {
+          this.images.unshift(response.text);
+          this.formData = null;
+        });
       };
 
       reader.readAsDataURL(input.target.files[0]);
@@ -92,38 +119,26 @@ export class ContentDetailProductComponent implements OnInit {
     }
 
     this.contentForm.markAsPristine();
-    let product = new Product(this.product.id, this.f.title.value, this.f.description.value, this.f.price.value, this.imageSrc, this.selectedCategory);
-    if (this.dirty && this.formData != null) {
-      this.damService.uploadImage(this.formData, "product").subscribe(response => {
-        
-        let imageProduct: ImageProduct = {
-          id: 0,
-          title: "image",
-          image: response.text
-        };
+    let imageProducts = this.images.map(image => new ImageProduct(image));
+    let available = false;
 
-        this.formData = null;
-        product.images.push(imageProduct);
-        this.damService.updateProduct(product).subscribe(response => {
-          this.product = response.data;
-
-          this.damService.getProducts().subscribe(responseProducts => {
-            this.damService.productsSubject.next(responseProducts.data);
-          });
-        });
-      });
-    } else {
-      if (!this.product.image) {
-        this.product.image = "example.jpg";
-      }
-      this.damService.updateProduct(product).subscribe(response => {
-        this.product = response.data;
-
-        this.damService.getProducts().subscribe(responseProducts => {
-          this.damService.productsSubject.next(responseProducts.data);
-        });
-      });
+    if(this.selectedAvailable == "Available") {
+      available = true;
     }
+
+    let product = new Product(this.product.id, this.f.title.value, this.f.description.value, this.f.price.value, imageProducts, this.selectedCategory, available);
+
+    if (!this.product.images) {
+      this.product.images = [];
+    }
+    this.damService.updateProduct(product).subscribe(response => {
+      this.product = response.data;
+
+      this.damService.getProducts().subscribe(responseProducts => {
+        this.damService.productsSubject.next(responseProducts.data);
+      });
+    });
+
   }
 
   onChange(category: Category) {

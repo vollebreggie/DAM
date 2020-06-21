@@ -16,7 +16,7 @@ export class ContentDetailMaterialComponent implements OnInit {
   file: HTMLInputEvent;
   contentForm: FormGroup;
   @Input() material: Material;
-  formData: FormData = new FormData();
+  formData: FormData = null;
   url: string = environment.apiUrl + "images/";
   dirty: boolean = false;
   categories: Category[];
@@ -32,7 +32,6 @@ export class ContentDetailMaterialComponent implements OnInit {
 
             this.damService.getCategories().subscribe(r =>  {
               this.categories = r.data;
-              console.log(this.material);
               if(this.material.category){
                 this.selectedCategory = this.categories.find(c => c.id == this.material.category.id);
               } else {
@@ -70,9 +69,11 @@ export class ContentDetailMaterialComponent implements OnInit {
       var reader = new FileReader();
       this.dirty = true;
       this.contentForm.markAsDirty();
+      this.formData = new FormData();
       this.formData.append('file', input.target.files[0], input.target.files[0].name);
       reader.onload = (e: any) => {
         (<HTMLImageElement>document.getElementById('input-image')).src = e.target.result
+        
       };
 
       reader.readAsDataURL(input.target.files[0]);
@@ -92,12 +93,12 @@ export class ContentDetailMaterialComponent implements OnInit {
     this.contentForm.markAsPristine();
     let material = new Material(this.material.id, this.f.name.value, this.f.description.value,this.imageSrc, this.selectedCategory);
     if (this.dirty) {
-
       this.damService.uploadImage(this.formData, "material").subscribe(response => {
         material.image = response.text;
+        this.formData = null;
         this.damService.updateMaterial(material).subscribe(response => {
           this.material = response.data;
-
+          
           this.damService.getMaterials().subscribe(responseMaterials => {
             this.damService.materialsSubject.next(responseMaterials.data);
           });

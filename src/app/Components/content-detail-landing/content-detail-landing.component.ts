@@ -116,7 +116,7 @@ export class ContentDetailLandingComponent implements OnInit {
 
   onChange(product: Product) {
     this.dirty = true;
-    (<HTMLImageElement>document.getElementById('landing-selected')).src = this.url + this.selectedProduct.image;
+    (<HTMLImageElement>document.getElementById('landing-selected')).src = this.url + this.selectedProduct.images[0].image;
   }
 }
 

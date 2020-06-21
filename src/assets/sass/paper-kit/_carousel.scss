@@ -1,6 +1,6 @@
 .carousel-control-prev,
 .carousel-control-next{
-    background-color: $danger-color;
+    background-color: transparent;
     border-radius: 50%;
     opacity: 1;
     text-shadow: none;
@@ -9,7 +9,8 @@
     &:hover,
     &:focus{
         opacity: 1;
-        background-color: $danger-states-color;
+        color: whitesmoke;
+        background-color: transparent;
     }
 }
 .carousel-control-prev-icon{
@@ -24,6 +25,7 @@
         content: "\f104" !important;
     }
 }
+
 .carousel-control-next-icon{
     background-image: none !important;
     margin-top: -5px;
@@ -36,17 +38,19 @@
         content: "\f105" !important;
     }
 }
+
 .carousel-control-prev{
     height: 30px;
-    top: 48%;
+    top: 48% !important;
     width: 30px;
     left: 20px;
     opacity: 0;
 }
+
 .carousel-control-next{
     height: 30px;
     right: 20px;
-    top: 48%;
+    top: 48% !important;
     width: 30px;
     opacity: 0;
 }
@@ -78,7 +82,7 @@
         img{
             border-radius: $border-radius-extreme;
             box-shadow: 0 2px 2px rgba(204, 197, 185, 0.5);
-            height: 400px;
+            height: 250px !important;
             width: 100%;
         }
     }

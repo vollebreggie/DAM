@@ -11,11 +11,13 @@ import { Reference } from '../Models/Reference';
 import { Material } from '../Models/Material';
 import { Product } from '../Models/Product';
 import { Category } from '../Models/Category';
+import { debounceTime, distinctUntilChanged, switchMap, map, flatMap, mergeMap } from 'rxjs/operators';
+import { stringify } from 'querystring';
 
 @Injectable({ providedIn: 'root' })
 export class DAMService extends RestService<User> {
-    constructor(http: HttpClient, _authenticationService: AuthenticationService) { 
-        super('DAM', http, _authenticationService); 
+    constructor(http: HttpClient, _authenticationService: AuthenticationService) {
+        super('DAM', http, _authenticationService);
         this.currentSubject = new BehaviorSubject<User>(null);
         this.current = this.currentSubject.asObservable();
 
@@ -61,6 +63,22 @@ export class DAMService extends RestService<User> {
         return this.makeRequest("GET", "/getProduct/" + id);
     }
 
+    //product
+
+    public search(terms: Observable<string>) {
+        return terms.pipe(debounceTime(100),
+            distinctUntilChanged(),
+            switchMap(term => this.getProductSearch(term)));
+    }
+
+    public getProductSearch(q: string): Observable<Product[]> {
+        if(q.length > 0) {
+            return this.makeRequest("GET", "/getProductSearch/" + q).pipe(map(r => r.data as Product[]))
+        } else {
+            return this.makeRequest("GET", "/getProducts").pipe(map(r => r.data as Product[]));
+        }
+    }
+
     public getProducts(): Observable<ApiResponse<Product[]>> {
         return this.makeRequest("GET", "/getProducts");
     }
@@ -95,7 +113,7 @@ export class DAMService extends RestService<User> {
         return this.makeRequest("POST", "/updateMaterial", material);
     }
 
-    
+
     //Reference
     public getReferences(): Observable<ApiResponse<Reference[]>> {
         return this.makeRequest("GET", "/getReferences");
@@ -113,11 +131,11 @@ export class DAMService extends RestService<User> {
         return this.makeRequest("POST", "/updateReference", reference);
     }
 
-    public getStoneMaterials(): Observable<ApiResponse<Material[]>>{
+    public getStoneMaterials(): Observable<ApiResponse<Material[]>> {
         return this.makeRequest("GET", "/getStoneMaterials");
     }
 
-    public getWoodMaterials(): Observable<ApiResponse<Material[]>>{
+    public getWoodMaterials(): Observable<ApiResponse<Material[]>> {
         return this.makeRequest("GET", "/getWoodMaterials");
     }
 

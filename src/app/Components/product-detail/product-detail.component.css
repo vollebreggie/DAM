@@ -7,6 +7,7 @@
 }
 
 .product-image {
+    object-fit: cover;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -23,6 +24,7 @@
 .clicky {
     cursor: pointer;
 }
+
 
 .product-image-shadow {
     transform: scale(.94);

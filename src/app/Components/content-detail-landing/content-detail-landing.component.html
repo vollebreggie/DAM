@@ -7,16 +7,16 @@
                     <img [src]="url + imageSrc || './assets/img/example.jpg'" (click)="upload.click()" id="input-image" class="profile-card">
                     <div class="row" *ngIf="products">
                         <div class="landing-image-container col" (click)="openModal('custom-modal-1', products[0], 0)">
-                            <img [src]="url + products[0].image || './assets/img/example.jpg'" class="landing-image">
-                            <img [src]="url + products[0].image || './assets/img/example.jpg'" class="landing-image-shadow">
+                            <img [src]="url + products[0].images[0].image || './assets/img/example.jpg'" class="landing-image">
+                            <img [src]="url + products[0].images[0].image || './assets/img/example.jpg'" class="landing-image-shadow">
                         </div>
                         <div class="landing-image-container col" (click)="openModal('custom-modal-1', products[1], 1)">
-                            <img [src]="url + products[1].image || './assets/img/example.jpg'" class="landing-image">
-                            <img [src]="url + products[1].image || './assets/img/example.jpg'" class="landing-image-shadow">
+                            <img [src]="url + products[1].images[0].image || './assets/img/example.jpg'" class="landing-image">
+                            <img [src]="url + products[1].images[0].image || './assets/img/example.jpg'" class="landing-image-shadow">
                         </div>
                         <div class="landing-image-container col" (click)="openModal('custom-modal-1', products[2], 2)">
-                            <img [src]="url + products[2].image || './assets/img/example.jpg'" class="landing-image">
-                            <img [src]="url + products[2].image || './assets/img/example.jpg'" class="landing-image-shadow">
+                            <img [src]="url + products[2].images[0].image || './assets/img/example.jpg'" class="landing-image">
+                            <img [src]="url + products[2].images[0].image || './assets/img/example.jpg'" class="landing-image-shadow">
                         </div>
                     </div>
                 </div>
@@ -70,10 +70,10 @@
           </select>
 
         <div *ngIf="selectedProduct" class="landing-image-container room col" style="cursor:default">
-            <img [src]="url + selectedProduct.image || './assets/img/example.jpg'" style="cursor:default" id="landing-selected" class="landing-image">
-            <img [src]="url + selectedProduct.image || './assets/img/example.jpg'" style="cursor:default" id="landing-selected" class="landing-image-shadow">
+            <img [src]="url + selectedProduct.images[0].image || './assets/img/example.jpg'" style="cursor:default" id="landing-selected" class="landing-image">
+            <img [src]="url + selectedProduct.images[0].image || './assets/img/example.jpg'" style="cursor:default" id="landing-selected" class="landing-image-shadow">
         </div>
-        <button class="btn btn-primary" [disabled]="!dirty || !contentForm.dirty" (click)="save()"><div *ngIf="!dirty || !contentForm.dirty">Content up to date</div>  <div *ngIf="dirty || contentForm.dirty">Save</div></button>
+        <button class="btn btn-primary" [disabled]="!dirty && !contentForm.dirty" (click)="save()"><div *ngIf="!dirty || !contentForm.dirty">Content up to date</div>  <div *ngIf="dirty || contentForm.dirty">Save</div></button>
         <button class="btn btn-primary" (click)="closeModal('custom-modal-1');">Close</button>
     </jw-modal>
 </form>

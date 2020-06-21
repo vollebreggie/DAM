@@ -28,6 +28,9 @@ import { ContentDetailBlogComponent } from './Components/content-detail-blog/con
 import { ContentDetailReferenceComponent } from './Components/content-detail-reference/content-detail-reference.component';
 import {TimeAgoPipe} from 'time-ago-pipe';
 import { ProductDetailComponent } from './Components/product-detail/product-detail.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CarouselComponent } from './Components/carousel/carousel.component'
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,8 @@ import { ProductDetailComponent } from './Components/product-detail/product-deta
     ContentDetailBlogComponent,
     ContentDetailReferenceComponent,
     TimeAgoPipe,
-    ProductDetailComponent
+    ProductDetailComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +65,9 @@ import { ProductDetailComponent } from './Components/product-detail/product-deta
     HttpClientModule,
     MatInputModule,
     MatMenuModule,
+    NgSelectModule,
     MatIconModule,
+    NgbModule,
     AnimateOnScrollModule.forRoot()
   ],
   exports: [

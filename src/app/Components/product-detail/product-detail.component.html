@@ -1,21 +1,39 @@
-<div id="landing" class="page-header" data-parallax="true" style="background-image: url('./assets/img/antoine-barres.jpg');">
+<div id="landing" class="page-header" data-parallax="true" style="background-image: url('./assets/img/woodWork.jpg');">
     <div class="filter"></div>
     <div class="container">
         <div class="row justify-content-center" *ngIf="product">
-            <div class="col-12 card-product">
+            <div class="col-10 card-product">
                 <div class="row justify-content-center mt-5">
-                    <div class="col-6 product-image-container ">
-                        <img [src]="imageUrl + product.image " class="product-image ">
-                        <img [src]="imageUrl + product.image " class="product-image-shadow ">
+                    <div class="col-6">
+                        <div id="firstProductImages" class="carousel slide" data-ride="carousel">
+                            <ul class="carousel-indicators">
+                                <li data-target="#firstProductImages" *ngFor="let image of product.images; index as i"
+                                    data-slide-to="i"></li>
+                            </ul>
+                            <div class="carousel-inner">
+                                <div class="carousel-item" *ngFor="let image of product.images; index as i"
+                                    id="image-{{i}}" [ngClass]="{'active': i == 0}">
+                                    <img [src]="imageUrl + image.image" class="product-image-carousel">
+                                    <div class="carousel-caption">
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#firstProductImages" data-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </a>
+                            <a class="carousel-control-next" href="#firstProductImages" data-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="row justify-content-center mt-3 ">
-                    <div class="product-tags ">{{ product.category.name }}</div>
+                    <div class="product-tags ">{{ product.category.name }} - <div *ngIf="product.available"> Beschikbaar</div><div *ngIf="!product.available"> Niet Beschikbaar</div></div>
                 </div>
                 <div class="row justify-content-center mt-2 ">
                     <div class="product-title ">{{ product.title}}</div>
                 </div>
-                <div class="row justify-content-center mt-2 ">
+                <div class="row justify-content-center p-5">
                     <div class="product-description ">{{ product.description }}</div>
                 </div>
             </div>

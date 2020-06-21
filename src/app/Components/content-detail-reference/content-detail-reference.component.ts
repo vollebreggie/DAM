@@ -15,7 +15,7 @@ export class ContentDetailReferenceComponent implements OnInit {
   file: HTMLInputEvent;
   contentForm: FormGroup;
   @Input() reference: Reference;
-  formData: FormData = new FormData();
+  formData: FormData = null;
   url: string = environment.apiUrl + "images/";
   dirty: boolean = false;
 
@@ -56,6 +56,7 @@ export class ContentDetailReferenceComponent implements OnInit {
       var reader = new FileReader();
       this.dirty = true;
       this.contentForm.markAsDirty();
+      this.formData = new FormData();
       this.formData.append('file', input.target.files[0], input.target.files[0].name);
       reader.onload = (e: any) => {
         (<HTMLImageElement>document.getElementById('input-image')).src = e.target.result
@@ -81,6 +82,7 @@ export class ContentDetailReferenceComponent implements OnInit {
 
       this.damService.uploadImage(this.formData, "reference").subscribe(response => {
         reference.image = response.text;
+        this.formData = null;
         this.damService.updateReference(reference).subscribe(response => {
           this.reference = response.data;
 

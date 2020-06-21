@@ -30,6 +30,7 @@ export class LandingBoardComponent implements OnInit {
     });
 
     this.damService.getProducts().subscribe(r => { 
+      console.log(r);
       this.products = r.data;
      });
     this.damService.getStoneMaterials().subscribe(r => this.stoneMaterials = r.data);
@@ -52,7 +53,7 @@ export class LandingBoardComponent implements OnInit {
 
   ngOnInit() {
     const scrollPosition = window.pageYOffset;
-    const newPage = Math.floor(scrollPosition / 829);
+    const newPage = Math.floor(scrollPosition / 759);
 
     this.onHoverWood("");
     this.onHoverStone("");
@@ -158,7 +159,7 @@ export class LandingBoardComponent implements OnInit {
         this.woodMaterial = "De meeste Wagonplanken zijn van eikenhout en hebben jarenlang gediend in oude goederenwagons. bijna alle wagonplanken hebben allerlei goederen vervoerd, van biervaten, specerijen tot andere consumptiegoederen. Wanneer de wagon planken niet meer te vertrouwen zijn om hier goederen op te vervoeren worden de wagons afgekeurd en in het vervolg zie je dat er meubels van gemaakt worden. De robuuste vorm en industriële look is erg gewild in de meubel industrie. Wagonplanken zijn relatief ook wat duurder dan alle andere houtsoorten.";
         break;
       default:
-        this.woodTitle = "Houten Materialen";
+        this.woodTitle = "Stenen materialen";
         this.woodMaterial = "Zweef over een plaatje heen voor meer informatie";
     }
   }

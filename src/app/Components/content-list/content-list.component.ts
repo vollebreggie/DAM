@@ -7,6 +7,7 @@ import { DAMService } from 'src/app/Services/DAMService';
 import { Type } from 'src/app/Models/Enums/Type';
 import { FooterService } from 'src/app/Services/FooterService';
 import { Reference } from 'src/app/Models/Reference';
+import { ImageProduct } from 'src/app/Models/ImageProduct';
 
 @Component({
   selector: 'content-list',
@@ -68,7 +69,7 @@ export class ContentListComponent implements OnInit {
   create(type: string) {
 
     if (type == "product") {
-      let product = new Product(0, "some", "some", 0, "example.jpg", null);
+      let product = new Product(0, "some", "some", 0, [ new ImageProduct("example.jpg"), new ImageProduct("example.jpg"), new ImageProduct("example.jpg") ], null, true);
       product.type = Type.Product;
       this.products.push(product);
       this.damService.currentSubject.next(product);

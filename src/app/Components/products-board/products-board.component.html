@@ -1,8 +1,9 @@
-<div id="landing" class="page-header" data-parallax="true" style="background-image: url('./assets/img/woodWork-3.jpg');">
+<div id="landing" class="page-header" data-parallax="true"
+    style="background-image: url('./assets/img/woodWork-3.jpg');">
     <div class="filter"></div>
     <div class="container">
         <div class="row">
-            <div class="col-md-4" *ngIf="products">
+            <div class="col-md-4" *ngIf="headerProducts">
                 <div class="card card-profile" *ngIf="landing" animateOnScroll animationName="fade-in-right ">
                     <div class="card-avatar ">
                         <a>
@@ -18,22 +19,23 @@
                                     Mijn laatste projecten
                                 </div>
                             </div>
-                            <div class="row mb-4 " *ngIf="products ">
-                                <div class="landing-image-container col" routerLink="/product/{{products[0].id}}">
-                                    <img [src]="imageUrl + products[0].image " class="landing-image ">
-                                    <img [src]="imageUrl + products[0].image " class="landing-image-shadow ">
+                            <div class="row mb-4 " *ngIf="headerProducts ">
+                                <div class="landing-image-container col" routerLink="/product/{{headerProducts[0].id}}">
+                                    <img [src]="imageUrl + headerProducts[0].images[0].image " class="landing-image ">
+                                    <img [src]="imageUrl + headerProducts[0].images[0].image " class="landing-image-shadow ">
                                 </div>
-                                <div class="landing-image-container col" routerLink="/product/{{products[1].id}}">
-                                    <img [src]="imageUrl + products[1].image " class="landing-image ">
-                                    <img [src]="imageUrl + products[1].image " class="landing-image-shadow ">
+                                <div class="landing-image-container col" routerLink="/product/{{headerProducts[1].id}}">
+                                    <img [src]="imageUrl + headerProducts[1].images[0].image " class="landing-image ">
+                                    <img [src]="imageUrl + headerProducts[1].images[0].image " class="landing-image-shadow ">
                                 </div>
-                                <div class="landing-image-container col" routerLink="/product/{{products[2].id}}">
-                                    <img [src]="imageUrl + products[2].image " class="landing-image ">
-                                    <img [src]="imageUrl + products[2].image " class="landing-image-shadow ">
+                                <div class="landing-image-container col" routerLink="/product/{{headerProducts[2].id}}">
+                                    <img [src]="imageUrl + headerProducts[2].images[0].image " class="landing-image ">
+                                    <img [src]="imageUrl + headerProducts[2].images[0].image " class="landing-image-shadow ">
                                 </div>
                             </div>
                         </div>
-                        <a [routerLink]="[ '/contact'] " class="btn mt-4 btn-dark btn-round " style="color:white; ">Contact</a>
+                        <a [routerLink]="[ '/contact'] " class="btn mt-4 btn-dark btn-round "
+                            style="color:white; ">Contact</a>
                     </div>
                 </div>
             </div>
@@ -48,23 +50,85 @@
 </div>
 <div class="main ">
     <div class="main-card ">
-        <section class="section " style="border-top-left-radius: 10px; border-top-right-radius: 10px; " id="product-synopsys ">
-            <div class="row justify-content-center clicky" *ngFor="let product of products" routerLink="/product/{{product.id}}">
-                <div class="col-6 ">
-                    <div class="row justify-content-center mt-5">
-                        <div class="product-image-container ">
-                            <img [src]="imageUrl + product.image " class="product-image ">
-                            <img [src]="imageUrl + product.image " class="product-image-shadow ">
+
+        <section class="section " style="border-top-left-radius: 10px; border-top-right-radius: 10px; "
+            id="product-synopsys ">
+            <ng-select [items]="products$ | async" bindLabel="title" autofocus bindValue="id"
+            (keyup)="searchTerm$.next($event.target.value)" class="p-4">
+            </ng-select>
+            <div class="row justify-content-center clicky" *ngFor="let product of products; let isOdd = odd;"
+                >
+                <div animateOnScroll animationName="fade-in-left" *ngIf="isOdd"
+                    class="product-container-row row justify-content-center clicky mt-5">
+                    <div class="product-image-container col-3">
+                        <div id="{{'carousel' + product.id}}" class="carousel slide" data-ride="carousel">
+                            <ul class="carousel-indicators">
+                                <li [attr.data-target]="'#' + product.id" *ngFor="let image of product.images; index as i"
+                                    data-slide-to="i"></li>
+                            </ul>
+                            <div class="carousel-inner">
+                                <div class="carousel-item" *ngFor="let image of product.images; index as i"
+                                    id="image-{{i}}" [ngClass]="{'active': i == 0}">
+                                    <img [src]="imageUrl + image.image" class="product-image-carousel"
+                                        routerLink="/product/{{product.id}}">
+                                    <div class="carousel-caption">
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="{{'#carousel' + product.id}}" data-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </a>
+                            <a class="carousel-control-next" href="{{'#carousel' + product.id}}" data-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </a>
                         </div>
                     </div>
-                    <div class="row justify-content-center mt-3 ">
-                        <div class="product-tags ">{{ product.category.name }}</div>
+                    <div class="product-text-right-container col-4" *ngIf="product"
+                        routerLink="/product/{{product.id}}">
+                        <div class="row product-tag">{{ product.category.name }} - <div *ngIf="product.available"> Beschikbaar</div><div *ngIf="!product.available">Niet Beschikbaar</div></div>
+                        <div class="row product-title">{{ product.title }} - €{{ product.price }}</div>
+                        <div class="row product-description" *ngIf="product.description.length >= 400">
+                            {{ product.description | slice:0:400}}..</div>
+                        <div class="row product-description" *ngIf="product.description.length <= 400">
+                            {{ product.description}}</div>
+                        <div class="row product-customer">
+                            {{ product.updated | timeAgo }}</div>
                     </div>
-                    <div class="row justify-content-center mt-2 ">
-                        <div class="product-title ">{{ product.title}}</div>
+                </div>
+                <div animateOnScroll animationName="fade-in-right" *ngIf="!isOdd"
+                    class="product-container-row row justify-content-center clicky mt-5">
+                    <div class="product-text-left-container col-4" *ngIf="product" routerLink="/product/{{product.id}}">
+                        <div class="row product-tag">{{ product.category.name }} - <div *ngIf="product.available"> Beschikbaar</div><div *ngIf="!product.available"> Niet Beschikbaar</div></div>
+                        <div class="row product-title">{{ product.title }} - €{{ product.price }}</div>
+                        <div class="row product-description" *ngIf="product.description.length >= 400">
+                            {{ product.description | slice:0:400}}..</div>
+                        <div class="row product-description" *ngIf="product.description.length <= 400">
+                            {{ product.description}}</div>
+                        <div class="row product-customer">
+                            {{ product.updated | timeAgo }}</div>
                     </div>
-                    <div class="row justify-content-center mt-2 ">
-                        <div class="product-description ">{{ product.description }}</div>
+                    <div class="product-image-container custom-left col-3">
+                        <div id="{{'carousel' + product.id}}" class="carousel slide" data-ride="carousel">
+                            <ul class="carousel-indicators">
+                                <li [attr.data-target]="'#' + product.id" *ngFor="let image of product.images; index as i"
+                                    data-slide-to="i"></li>
+                            </ul>
+                            <div class="carousel-inner">
+                                <div class="carousel-item" *ngFor="let image of product.images; index as i"
+                                    id="image-{{i}}" [ngClass]="{'active': i == 0}">
+                                    <img [src]="imageUrl + image.image" class="product-image-carousel"
+                                        routerLink="/product/{{product.id}}">
+                                    <div class="carousel-caption">
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="{{'#carousel' + product.id}}" data-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                            </a>
+                            <a class="carousel-control-next" href="{{'#carousel' + product.id}}" data-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

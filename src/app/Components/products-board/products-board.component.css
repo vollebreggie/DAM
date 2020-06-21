@@ -6,6 +6,10 @@
     z-index: 1;
 }
 
+.product-container-row {
+    opacity: 0;
+}
+
 .product-image {
     position: absolute;
     width: 100%;
