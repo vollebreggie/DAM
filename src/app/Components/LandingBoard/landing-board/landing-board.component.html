@@ -15,7 +15,7 @@
                         <div class="card-description">
                             <div class="row mt-4">
                                 <div class="col contact-description mb-1 d-flex justify-content-start">
-                                    Mijn laatste projecten
+                                    Mijn Top 3 projecten
                                 </div>
                             </div>
                             <div class="row mb-4" *ngIf="products">
@@ -77,7 +77,7 @@
     <div class="main-card">
         <section class="section" style="border-top-left-radius: 10px; border-top-right-radius: 10px;"
             id="product-synopsys">
-            <div class="title">Mijn Producten</div>
+            <div class="title">Mijn Top 3 Producten</div>
             <div class="product-container" *ngIf="products">
                 <div animateOnScroll animationName="fade-in-left" *ngIf="products"
                     class="product-container-row row justify-content-center clicky">
@@ -90,7 +90,8 @@
                             <div class="carousel-inner">
                                 <div class="carousel-item" *ngFor="let image of products[0].images; index as i"
                                     id="image-{{i}}" [ngClass]="{'active': i == 0}">
-                                    <img [src]="imageUrl + image.image" class="product-image-carousel" routerLink="/product/{{products[0].id}}">
+                                    <img [src]="imageUrl + image.image" class="product-image-carousel"
+                                        routerLink="/product/{{products[0].id}}">
                                     <div class="carousel-caption">
                                     </div>
                                 </div>
@@ -103,21 +104,34 @@
                             </a>
                         </div>
                     </div>
-                    <div class="product-text-right-container col-4" *ngIf="products[0]" routerLink="/product/{{products[0].id}}">
-                        <div class="row product-tag">{{ products[0].category.name }} - <div *ngIf="products[0].available"> Beschikbaar</div><div *ngIf="!products[0].available">Niet Beschikbaar</div></div>
-                        <div class="row product-title">{{ products[0].title }}  - €{{ products[0].price }}</div>
-                        <div class="row product-description" *ngIf="products[0].description.length >= 400">{{ products[0].description | slice:0:400}}..</div>
-                        <div class="row product-description" *ngIf="products[0].description.length <= 400">{{ products[0].description}}</div>                       <div class="row product-customer">By {{ landing.firstName }},
+                    <div class="product-text-right-container col-4" *ngIf="products[0]"
+                        routerLink="/product/{{products[0].id}}">
+                        <div class="row product-tag">{{ products[0].category.name }} - <div
+                                *ngIf="products[0].available"> Beschikbaar</div>
+                            <div *ngIf="!products[0].available">Niet Beschikbaar</div>
+                        </div>
+                        <div class="row product-title">{{ products[0].title }} - €{{ products[0].price }}</div>
+                        <div class="row product-description" *ngIf="products[0].description.length >= 400">
+                            {{ products[0].description | slice:0:400}}..</div>
+                        <div class="row product-description" *ngIf="products[0].description.length <= 400">
+                            {{ products[0].description}}</div>
+                        <div class="row product-customer">By {{ landing.firstName }},
                             {{ products[0].updated | timeAgo }}</div>
                     </div>
                 </div>
                 <div animateOnScroll animationName="fade-in-right" *ngIf="products"
                     class="product-container-row row justify-content-center clicky">
-                    <div class="product-text-left-container col-4" *ngIf="products[1]" routerLink="/product/{{products[1].id}}">
-                        <div class="row product-tag">{{ products[1].category.name }} - <div *ngIf="products[1].available"> Beschikbaar</div><div *ngIf="!products[1].available">Niet Beschikbaar</div></div>
+                    <div class="product-text-left-container col-4" *ngIf="products[1]"
+                        routerLink="/product/{{products[1].id}}">
+                        <div class="row product-tag">{{ products[1].category.name }} - <div
+                                *ngIf="products[1].available"> Beschikbaar</div>
+                            <div *ngIf="!products[1].available">Niet Beschikbaar</div>
+                        </div>
                         <div class="row product-title">{{ products[1].title }} - €{{ products[1].price }}</div>
-                        <div class="row product-description" *ngIf="products[1].description.length >= 400">{{ products[1].description | slice:0:400}}..</div>
-                        <div class="row product-description" *ngIf="products[1].description.length <= 400">{{ products[1].description}}</div>
+                        <div class="row product-description" *ngIf="products[1].description.length >= 400">
+                            {{ products[1].description | slice:0:400}}..</div>
+                        <div class="row product-description" *ngIf="products[1].description.length <= 400">
+                            {{ products[1].description}}</div>
                         <div class="row product-customer">By {{ landing.firstName }},
                             {{ products[1].updated | timeAgo }}</div>
                     </div>
@@ -130,7 +144,8 @@
                             <div class="carousel-inner">
                                 <div class="carousel-item" *ngFor="let image of products[1].images; index as i"
                                     id="image-{{i}}" [ngClass]="{'active': i == 0}">
-                                    <img [src]="imageUrl + image.image" class="product-image-carousel" routerLink="/product/{{products[1].id}}">
+                                    <img [src]="imageUrl + image.image" class="product-image-carousel"
+                                        routerLink="/product/{{products[1].id}}">
                                     <div class="carousel-caption">
                                     </div>
                                 </div>
@@ -155,7 +170,8 @@
                             <div class="carousel-inner">
                                 <div class="carousel-item" *ngFor="let image of products[2].images; index as i"
                                     id="image-{{i}}" [ngClass]="{'active': i == 0}">
-                                    <img [src]="imageUrl + image.image" class="product-image-carousel" routerLink="/product/{{products[2].id}}">
+                                    <img [src]="imageUrl + image.image" class="product-image-carousel"
+                                        routerLink="/product/{{products[2].id}}">
                                     <div class="carousel-caption">
                                     </div>
                                 </div>
@@ -168,11 +184,17 @@
                             </a>
                         </div>
                     </div>
-                    <div class="product-text-right-container col-4" *ngIf="products[2]" routerLink="/product/{{products[2].id}}">
-                        <div class="row product-tag">{{ products[2].category.name }} - <div *ngIf="products[2].available"> Beschikbaar</div><div *ngIf="!products[2].available">Niet Beschikbaar</div> </div>
-                        <div class="row product-title">{{ products[2].title }} - €{{ products[3].price }}</div>
-                        <div class="row product-description" *ngIf="products[2].description.length >= 400">{{ products[2].description | slice:0:400}}..</div>
-                        <div class="row product-description" *ngIf="products[2].description.length <= 400">{{ products[2].description}}</div>
+                    <div class="product-text-right-container col-4" *ngIf="products[2]"
+                        routerLink="/product/{{products[2].id}}">
+                        <div class="row product-tag">{{ products[2].category.name }} - <div
+                                *ngIf="products[2].available"> Beschikbaar</div>
+                            <div *ngIf="!products[2].available">Niet Beschikbaar</div>
+                        </div>
+                        <div class="row product-title">{{ products[2].title }} - €{{ products[2].price }}</div>
+                        <div class="row product-description" *ngIf="products[2].description.length >= 400">
+                            {{ products[2].description | slice:0:400}}..</div>
+                        <div class="row product-description" *ngIf="products[2].description.length <= 400">
+                            {{ products[2].description}}</div>
                         <div class="row product-customer">By {{ landing.firstName }},
                             {{ products[2].updated | timeAgo }}</div>
                     </div>
@@ -358,26 +380,25 @@
                     <div class="contact-location-description">Buizerdstraat,<br /> nr. 62, 2665TG Bleiswijk,<br />
                         Netherlands</div>
                     <div class="contact-info"><i class="material-icons">phone</i> Give us a ring</div>
-                    <div class="contact-info-description">Dylan Vollebregt<br /> +40 762 321 762 Mon - Fri,<br />
-                        dylan.vollebregt@gmail.com</div>
+                    <div class="contact-info-description">Dylan Vollebregt<br /> 06-83170243<br />
+                        maisondam@hotmail.com</div>
                 </div>
                 <div class="col-4">
                     <div class="card">
                         <div class="card-header">Contact Me</div>
                         <div class="card-body">
-
-                            <form class="example-form">
+                            <form [formGroup]="contactForm" (ngSubmit)="sendMessage()" class="example-form">
                                 <div class="row mt-4">
                                     <div class="col ">
                                         <mat-form-field class="example-full-width">
                                             <mat-label>First Name</mat-label>
-                                            <input matInput placeholder="Ex. Pizza" value="">
+                                            <input matInput placeholder="" formControlName="firstname">
                                         </mat-form-field>
                                     </div>
                                     <div class="col">
                                         <mat-form-field class="example-full-width">
                                             <mat-label>Last Name</mat-label>
-                                            <input matInput placeholder="" value="">
+                                            <input matInput placeholder="" formControlName="lastname">
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -385,7 +406,7 @@
                                     <div class="col">
                                         <mat-form-field class="example-full-width">
                                             <mat-label>Email</mat-label>
-                                            <input matInput placeholder="" value="">
+                                            <input matInput placeholder="" formControlName="email">
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -394,13 +415,13 @@
                                         <mat-form-field class="example-full-width">
                                             <mat-label>Your Message</mat-label>
                                             <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="10"
-                                                placeholder=""></textarea>
+                                                placeholder="" formControlName="message"></textarea>
                                         </mat-form-field>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col d-flex justify-content-end">
-                                        <button type="button" class="btn btn-dark">Send Message</button>
+                                        <button type="submit" class="btn btn-dark">Send Message</button>
                                     </div>
                                 </div>
                             </form>

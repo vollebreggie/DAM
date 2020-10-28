@@ -9,25 +9,25 @@
                     <div class="contact-location"><i class="material-icons">pin_drop</i> Find us at the office</div>
                     <div class="contact-location-description">Buizerdstraat,<br /> nr. 62, 2665TG Bleiswijk,<br /> Netherlands</div>
                     <div class="contact-info"><i class="material-icons">phone</i> Give us a ring</div>
-                    <div class="contact-info-description">Dylan Vollebregt<br /> +40 762 321 762 Mon - Fri,<br /> dylan.vollebregt@gmail.com</div>
+                    <div class="contact-info-description">Dylan Vollebregt<br /> 06-83170243<br /> maisondam@hotmail.com</div>
                 </div>
                 <div class="col-4">
                     <div class="card">
                         <div class="card-header">Contact Me</div>
                         <div class="card-body">
 
-                            <form class="example-form">
+                            <form [formGroup]="contactForm" (ngSubmit)="sendMessage()" class="example-form">
                                 <div class="row mt-4">
                                     <div class="col ">
                                         <mat-form-field class="example-full-width">
                                             <mat-label>First Name</mat-label>
-                                            <input matInput placeholder="Ex. Pizza" value="">
+                                            <input matInput placeholder="" formControlName="firstname">
                                         </mat-form-field>
                                     </div>
                                     <div class="col">
                                         <mat-form-field class="example-full-width">
                                             <mat-label>Last Name</mat-label>
-                                            <input matInput placeholder="" value="">
+                                            <input matInput placeholder="" formControlName="lastname">
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -35,7 +35,7 @@
                                     <div class="col">
                                         <mat-form-field class="example-full-width">
                                             <mat-label>Email</mat-label>
-                                            <input matInput placeholder="" value="">
+                                            <input matInput placeholder="" formControlName="email">
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -43,13 +43,14 @@
                                     <div class="col">
                                         <mat-form-field class="example-full-width">
                                             <mat-label>Your Message</mat-label>
-                                            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="10" placeholder=""></textarea>
+                                            <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="10"
+                                                placeholder="" formControlName="message"></textarea>
                                         </mat-form-field>
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col d-flex justify-content-end">
-                                        <button type="button" class="btn btn-dark">Send Message</button>
+                                        <button type="submit" class="btn btn-dark">Send Message</button>
                                     </div>
                                 </div>
                             </form>

@@ -1,4 +1,4 @@
-import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpHeaders, HttpClient, HttpErrorResponse, HttpClientJsonpModule } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { AuthenticationService } from './AuthenticationService';
@@ -78,6 +78,15 @@ export class RestService<T> {
         finalUrl,
         { body: body, headers: this._authenticationService.httpImageOptions.headers })
     );
+  }
+
+  //IP address
+  getIP(): Observable<any> {
+    return this._http.get('https://api.ipify.org/?format=json&callback=JSONP_CALLBACK')
+      .pipe(
+        map((res: any) => {
+          return res.ip;
+        }));
   }
 
   /////// private methods

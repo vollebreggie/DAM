@@ -15,7 +15,7 @@ import { LoginComponent } from './Components/login/login.component';
 import { ContentComponent } from './Components/content/content.component';
 import { AlertComponent } from './Components/alert/alert.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { ContentListComponent } from './Components/content-list/content-list.component';
 import { ContentDetailsComponent } from './Components/content-details/content-details.component';
 import { ContentDetailProductComponent } from './Components/content-detail-product/content-detail-product.component';
@@ -63,6 +63,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     MatInputModule,
     MatMenuModule,
     NgSelectModule,

@@ -122,7 +122,8 @@ section.section .resume-item .resume-date {
     color: #999;
     font-size: 14px;
     margin-bottom: 10px;
-    word-break: break-all;
+    white-space: pre-wrap;
+    text-align: left;
 }
 
 .product-customer {

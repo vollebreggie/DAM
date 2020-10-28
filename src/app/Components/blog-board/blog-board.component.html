@@ -15,19 +15,19 @@
                         <div class="card-description">
                             <div class="row mt-4">
                                 <div class="col contact-description mb-1 d-flex justify-content-start">
-                                    Mijn laatste blogs
+                                    Mijn laatste projecten
                                 </div>
                             </div>
                             <div class="row mb-4" *ngIf="blogs">
-                                <div class="landing-image-container col">
+                                <div class="landing-image-container col" *ngIf="blogs.length >= 1">
                                     <img [src]="imageUrl + blogs[0].image" class="landing-image">
                                     <img [src]="imageUrl + blogs[0].image" class="landing-image-shadow">
                                 </div>
-                                <div class="landing-image-container col">
+                                <div class="landing-image-container col" *ngIf="blogs.length >= 2">
                                     <img [src]="imageUrl + blogs[1].image" class="landing-image">
                                     <img [src]="imageUrl + blogs[1].image" class="landing-image-shadow">
                                 </div>
-                                <div class="landing-image-container col">
+                                <div class="landing-image-container col" *ngIf="blogs.length >= 3">
                                     <img [src]="imageUrl + blogs[2].image" class="landing-image">
                                     <img [src]="imageUrl + blogs[2].image" class="landing-image-shadow">
                                 </div>

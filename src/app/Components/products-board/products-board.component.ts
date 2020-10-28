@@ -23,6 +23,7 @@ export class ProductsBoardComponent implements OnInit {
     this.damService.getProducts().subscribe(response => {
       this.products = response.data;
       this.headerProducts = response.data;
+      this.damService.logIp("productspage").subscribe();
     });
 
     this.damService.getLanding().subscribe(response => this.landing = response.data);

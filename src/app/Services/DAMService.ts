@@ -13,6 +13,8 @@ import { Product } from '../Models/Product';
 import { Category } from '../Models/Category';
 import { debounceTime, distinctUntilChanged, switchMap, map, flatMap, mergeMap } from 'rxjs/operators';
 import { stringify } from 'querystring';
+import { Message } from '../Models/Message';
+import { Log } from '../Models/Log';
 
 @Injectable({ providedIn: 'root' })
 export class DAMService extends RestService<User> {
@@ -49,6 +51,11 @@ export class DAMService extends RestService<User> {
     public referencesSubject: BehaviorSubject<any>;
     public references: Observable<any>;
 
+
+    public postMessage(message: Message): Observable<ApiResponse<boolean>> {
+        return this.makeRequest("POST", "/postMessage", message);
+    }
+
     //getAll
     public getAll(): Observable<ApiResponse<any[]>> {
         return this.makeRequest("GET", "/getAll");
@@ -72,7 +79,7 @@ export class DAMService extends RestService<User> {
     }
 
     public getProductSearch(q: string): Observable<Product[]> {
-        if(q.length > 0) {
+        if (q.length > 0) {
             return this.makeRequest("GET", "/getProductSearch/" + q).pipe(map(r => r.data as Product[]))
         } else {
             return this.makeRequest("GET", "/getProducts").pipe(map(r => r.data as Product[]));
@@ -175,6 +182,24 @@ export class DAMService extends RestService<User> {
 
     public updateLandingProductPlaces(products: Product[]): Observable<ApiResponse<Product[]>> {
         return this.makeRequest("POST", "/updateLandingPlaces", products);
+    }
+
+    private postLog(ip: string, information: string) {
+        let body: Log = {
+            id: 0,
+            information: information,
+            type: 0,
+            ipAdress: ip,
+            logged: new Date()
+        };
+
+        return this.makeRequest("POST", "/PostLog", body);
+    }
+
+    public logIp(information: string) {
+        return this.getIP().pipe(flatMap(response => {
+            return this.postLog(response, information);
+        }));
     }
 
 

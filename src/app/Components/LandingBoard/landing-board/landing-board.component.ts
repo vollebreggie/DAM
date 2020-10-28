@@ -6,6 +6,8 @@ import { Material } from 'src/app/Models/Material';
 import { Reference } from 'src/app/Models/Reference';
 import { environment } from 'src/environments/environment';
 import { NavigationService } from 'src/app/Services/NavigationService';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Message } from 'src/app/Models/Message';
 
 @Component({
   selector: 'app-landing-board',
@@ -21,21 +23,33 @@ export class LandingBoardComponent implements OnInit {
   references: Reference[];
   imageUrl: string = environment.apiUrl + "images/";
   landingImage: string = "";
+  contactForm: FormGroup;
 
-  constructor(public el: ElementRef, private damService: DAMService, private navigationService: NavigationService) {
+  constructor(public el: ElementRef,
+    private damService: DAMService,
+    private navigationService: NavigationService,
+    private formBuilder: FormBuilder) {
     this.navigationService.navigationSubject.next(false);
     this.damService.getLanding().subscribe(r => {
       this.landing = r.data;
       this.landingImage = this.imageUrl + this.landing.profilePicture;
     });
 
-    this.damService.getProducts().subscribe(r => { 
+    this.contactForm = this.formBuilder.group({
+      firstname: '',
+      lastname: '',
+      email: '',
+      message: ''
+    });
+
+    this.damService.getProducts().subscribe(r => {
       console.log(r);
       this.products = r.data;
-     });
+    });
     this.damService.getStoneMaterials().subscribe(r => this.stoneMaterials = r.data);
     this.damService.getWoodMaterials().subscribe(r => this.woodMaterials = r.data);
     this.damService.getReferences().subscribe(r => this.references = r.data);
+    this.damService.logIp("landingspage").subscribe();
   }
 
   woodMaterial: string;
@@ -50,6 +64,19 @@ export class LandingBoardComponent implements OnInit {
   contactScroll: boolean = false;
   referenceScroll: boolean = false;
   private page: number = -1;
+
+
+  sendMessage() {
+    let message: Message = {
+      email: this.contactForm.value.email,
+      firstname: this.contactForm.value.firstname,
+      lastname: this.contactForm.value.lastname,
+      message: this.contactForm.value.message
+    }
+
+    this.damService.postMessage(message).subscribe();
+    this.contactForm.reset();
+  }
 
   ngOnInit() {
     const scrollPosition = window.pageYOffset;
@@ -106,15 +133,15 @@ export class LandingBoardComponent implements OnInit {
     window.scrollTo({ top: y, behavior: 'smooth' });
   }
 
- onHoverWoodByObject(material: Material){
-   this.woodTitle = material.name;
-   this.woodMaterial = material.description;
- }
+  onHoverWoodByObject(material: Material) {
+    this.woodTitle = material.name;
+    this.woodMaterial = material.description;
+  }
 
- onHoverStoneByObject(material: Material){
-  this.stoneTitle = material.name;
-  this.stoneMaterial = material.description;
-}
+  onHoverStoneByObject(material: Material) {
+    this.stoneTitle = material.name;
+    this.stoneMaterial = material.description;
+  }
 
   onHoverWood(name: string) {
     switch (name) {

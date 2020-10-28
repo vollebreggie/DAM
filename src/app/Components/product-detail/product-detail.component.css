@@ -61,7 +61,8 @@
     margin-bottom: 15px;
     font-family: Roboto, Helvetica, Arial, sans-serif;
     font-weight: 300;
-    text-align: center;
+    white-space: pre-wrap;
+    text-align: left;
 }
 
 @media (max-width: 1600px) {

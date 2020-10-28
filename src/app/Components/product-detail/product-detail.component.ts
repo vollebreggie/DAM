@@ -16,6 +16,7 @@ export class ProductDetailComponent implements OnInit {
   constructor(private route: ActivatedRoute, private damService: DAMService) { 
     const id = +this.route.snapshot.paramMap.get('id');
     this.damService.getProduct(id).subscribe(r => this.product = r.data);
+    this.damService.logIp("product detail " + id + "page").subscribe();
   }
 
   ngOnInit() {
