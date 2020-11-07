@@ -1,0 +1,61 @@
+.line {
+    border-bottom: solid 1px rgb(221, 215, 215);
+}
+
+.product-image-container {
+    width: auto;
+}
+
+.carousel-inner .carousel-item img {
+    height: 200px !important;
+}
+
+.product-image-container {
+    height: 220px;
+}
+
+.product-description {
+    height: 50px;
+}
+
+.product-title {
+    height: 30px;
+}
+
+.icon {
+    color: #66615B;
+    font-size: 18px;
+}
+
+.icon-remove {
+    color: #66615B;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.icon-remove:hover {
+    color: #adaba9;
+}
+
+.icon-add {
+    color: #66615B;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.icon-default {
+    color: #66615B;
+    font-size: 18px;
+    cursor: default;
+}
+
+.icon-add:hover {
+    color: #bbbab8;
+    font-size: 18px;
+}
+
+.product-price {
+    color: #999;
+    font-weight: 500;
+    font-size: 18px;
+}

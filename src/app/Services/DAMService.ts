@@ -15,6 +15,7 @@ import { debounceTime, distinctUntilChanged, switchMap, map, flatMap, mergeMap }
 import { stringify } from 'querystring';
 import { Message } from '../Models/Message';
 import { Log } from '../Models/Log';
+import { CartProduct } from '../Models/CartProduct';
 
 @Injectable({ providedIn: 'root' })
 export class DAMService extends RestService<User> {
@@ -34,6 +35,12 @@ export class DAMService extends RestService<User> {
 
         this.blogsSubject = new BehaviorSubject<Blog[]>([]);
         this.blogs = this.blogsSubject.asObservable();
+
+        this.cartSubject = new BehaviorSubject<CartProduct[]>([]);
+        this.cart$ = this.cartSubject.asObservable();
+
+        this.cartCountSubject = new BehaviorSubject<number>(0);
+        this.cartCount$ = this.cartCountSubject.asObservable();
     }
 
     public currentSubject: BehaviorSubject<any>;
@@ -51,6 +58,13 @@ export class DAMService extends RestService<User> {
     public referencesSubject: BehaviorSubject<any>;
     public references: Observable<any>;
 
+    public cart: CartProduct[] = [];
+    public cartSubject: BehaviorSubject<any>;
+    public cart$: Observable<any>;
+
+    public cartCountSubject: BehaviorSubject<any>;
+    public cartCount$: Observable<any>;
+    public cartCount: number = 0;
 
     public postMessage(message: Message): Observable<ApiResponse<boolean>> {
         return this.makeRequest("POST", "/postMessage", message);
@@ -202,5 +216,57 @@ export class DAMService extends RestService<User> {
         }));
     }
 
+    //Landing
+    public addNewProductToCart(cartProduct: CartProduct): Observable<ApiResponse<CartProduct>> {
+        this.cartCount++;
+        this.cartCountSubject.next(this.cartCount);
+        this.cart.push(cartProduct);
+        this.cartSubject.next(this.cart);
 
+        return this.makeRequest("GET", "/addNewProductToCart/" + cartProduct.product.id);
+    }
+
+    public addProductToCart(cartProduct: CartProduct): Observable<ApiResponse<CartProduct>> {
+        let index = this.cart.findIndex(c => c.product.id == cartProduct.product.id);
+        
+        if (index > -1) {
+            this.cart.splice(index, 1, cartProduct);
+        }
+        this.cartSubject.next(this.cart);
+        return this.makeRequest("GET", "/AddProductToCart/" + cartProduct.id);
+    }
+
+    public removeProductFromCart(cartProduct: CartProduct): Observable<ApiResponse<CartProduct>> {
+        let index = this.cart.findIndex(c => c.product.id == cartProduct.product.id);
+        
+        if (index > -1 && cartProduct.quantity >=1) {
+            this.cart.splice(index, 1, cartProduct);
+        } else {
+            this.cart.splice(index, 1);
+        }
+        this.cartSubject.next(this.cart);
+        return this.makeRequest("GET", "/RemoveProductFromCart/" + cartProduct.id);
+    }
+
+    public removeAllProductFromCart(cartProduct: CartProduct): Observable<ApiResponse<CartProduct>> {
+        this.cartCount--;
+        this.cartCountSubject.next(this.cartCount);
+        let index = this.cart.findIndex(c => c.product.id == cartProduct.product.id);
+        
+        if (index > -1) {
+            this.cart.splice(index, 1);
+        }
+
+        this.cartSubject.next(this.cart);
+
+        return this.makeRequest("GET", "/RemoveAllProductFromCart/" + cartProduct.id);
+    }
+
+    public getProductsFromCart(): Observable<ApiResponse<CartProduct[]>> {
+        return this.makeRequest("GET", "/GetProductsFromCart");
+    }
+
+    public getCartCount(): Observable<ApiResponse<number>> {
+        return this.makeRequest("GET", "/GetCartCount");
+    }
 }

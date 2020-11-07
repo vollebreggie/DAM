@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 import { NavigationService } from 'src/app/Services/NavigationService';
+import { DAMService } from 'src/app/Services/DAMService';
 
 @Component({
     selector: 'navbar',
@@ -12,12 +13,22 @@ export class NavigationComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
     darkTheme: boolean = false;
+    cartCounter: number = 0;
 
-    constructor(public location: Location, private element : ElementRef, private router: Router, private navigationService: NavigationService) {
+    constructor(
+        public location: Location,
+        private element: ElementRef,
+        private router: Router,
+        private navigationService: NavigationService,
+        private damService: DAMService
+    ) {
         this.sidebarVisible = false;
         this.navigationService.showNavigation.subscribe(s => {
             this.darkTheme = s;
         });
+
+        this.damService.cartCount$.subscribe(response => this.cartCounter = response);
+
         this.router.events.subscribe(event => {
             if (event instanceof NavigationStart) {
                 console.log(event.url);
@@ -45,7 +56,7 @@ export class NavigationComponent implements OnInit {
         const toggleButton = this.toggleButton;
         const html = document.getElementsByTagName('html')[0];
 
-        setTimeout(function(){
+        setTimeout(function () {
             toggleButton.classList.add('toggled');
         }, 500);
         html.classList.add('nav-open');
@@ -71,11 +82,11 @@ export class NavigationComponent implements OnInit {
     };
 
     isHome() {
-      var titlee = this.location.prepareExternalUrl(this.location.path());
-      if(titlee.charAt(0) === '#'){
-          titlee = titlee.slice( 1 );
-      }
-        if( titlee === '/home' ) {
+        var titlee = this.location.prepareExternalUrl(this.location.path());
+        if (titlee.charAt(0) === '#') {
+            titlee = titlee.slice(1);
+        }
+        if (titlee === '/home') {
             return true;
         }
         else {
@@ -84,11 +95,11 @@ export class NavigationComponent implements OnInit {
     }
 
     isDocumentation() {
-      var titlee = this.location.prepareExternalUrl(this.location.path());
-      if(titlee.charAt(0) === '#'){
-          titlee = titlee.slice( 1 );
-      }
-        if( titlee === '/documentation' ) {
+        var titlee = this.location.prepareExternalUrl(this.location.path());
+        if (titlee.charAt(0) === '#') {
+            titlee = titlee.slice(1);
+        }
+        if (titlee === '/documentation') {
             return true;
         }
         else {

@@ -31,6 +31,10 @@ import { ProductDetailComponent } from './Components/product-detail/product-deta
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselComponent } from './Components/carousel/carousel.component'
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ProductThumbnailComponent } from './Components/product-thumbnail/product-thumbnail.component';
+import { ShoppingBoardComponent } from './Components/shopping-board/shopping-board.component';
+import { ProductCartThumbnailComponent } from './Components/product-cart-thumbnail/product-cart-thumbnail.component';
+import { StripeModule } from 'stripe-angular';
 
 @NgModule({
   declarations: [
@@ -54,9 +58,13 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ContentDetailReferenceComponent,
     TimeAgoPipe,
     ProductDetailComponent,
-    CarouselComponent
+    CarouselComponent,
+    ProductThumbnailComponent,
+    ShoppingBoardComponent,
+    ProductCartThumbnailComponent
   ],
   imports: [
+    StripeModule.forRoot("pk_test_51Hj4MaIuJJsbx4ge9hVsIQFMLNc4jRBPA59uivZIONAvDCzaA29UEhIhcC87nNGDBSKAdLpoWoeFAQFK7QCD41zp00aDwVRui6"),
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
@@ -69,7 +77,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NgSelectModule,
     MatIconModule,
     NgbModule,
-    AnimateOnScrollModule.forRoot()
+    AnimateOnScrollModule.forRoot(),
+     
   ],
   exports: [
     TimeAgoPipe

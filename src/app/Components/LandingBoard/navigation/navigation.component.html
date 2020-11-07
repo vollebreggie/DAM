@@ -31,6 +31,13 @@
                 <li class="nav-item">
                     <a [routerLink]="['/contact']" class="nav-link">Contact</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['/cart']" rel="tooltip" title="Your cart" data-placement="bottom">
+                        <i class="fa fa-shopping-cart"></i>
+                        <p class="d-lg-none">Shoppingcard</p>
+                        <div *ngIf="cartCounter != 0" class="counter">{{ cartCounter }}</div>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

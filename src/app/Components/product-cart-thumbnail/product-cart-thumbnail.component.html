@@ -1,0 +1,60 @@
+<div class="product-container-row col justify-content-center clicky mt-5" *ngIf="cartProduct">
+  <div class="product-image-container row">
+    <div id="{{'carousel' + cartProduct.product.id}}" class="carousel slide" data-ride="carousel">
+      <ul class="carousel-indicators">
+        <li [attr.data-target]="'#' + cartProduct.product.id"
+          *ngFor="let image of cartProduct.product.images; index as i" data-slide-to="i">
+        </li>
+      </ul>
+      <div class="carousel-inner">
+        <div class="carousel-item" *ngFor="let image of cartProduct.product.images; index as i" id="image-{{i}}"
+          [ngClass]="{'active': i == 0}">
+          <img [src]="imageUrl + image.image" class="product-image-carousel"
+            routerLink="/product/{{cartProduct.product.id}}">
+          <div class="carousel-caption">
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="{{'#carousel' + cartProduct.product.id}}" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" href="{{'#carousel' + cartProduct.product.id}}" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+    </div>
+  </div>
+  <div class="col ml-2 mr-2" *ngIf="cartProduct && cartProduct.product">
+    <div routerLink="/product/{{cartProduct.product.id}}" class="row product-tag justify-content-center">
+      {{ cartProduct.product.category.name }}
+      <div *ngIf="!cartProduct.product.available">Niet Beschikbaar</div>
+    </div>
+    <div routerLink="/product/{{cartProduct.product.id}}" class="row product-title justify-content-center"
+      *ngIf="cartProduct.product.title.length >= 20">
+      {{ cartProduct.product.title | slice:0:20}}..</div>
+    <div routerLink="/product/{{cartProduct.product.id}}" class="row product-title justify-content-center"
+      *ngIf="cartProduct.product.title.length < 20">
+      {{ cartProduct.product.title}}</div>
+    <div routerLink="/product/{{cartProduct.product.id}}" class="row product-description justify-content-center"
+      *ngIf="cartProduct.product.description.length >= 80">
+      {{ cartProduct.product.description | slice:0:80}}..</div>
+    <div routerLink="/product/{{cartProduct.product.id}}" class="row product-description justify-content-center"
+      *ngIf="cartProduct.product.description.length < 80">
+      {{ cartProduct.product.description}}</div>
+    <div class="row line mt-4">
+
+    </div>
+    <div class="row mt-3">
+      <div *ngIf="cartProduct" class="col-1 product-price justify-content-center">{{ cartProduct.quantity }}x</div>
+      <div class="col-5 product-price justify-content-center">€ {{ cartProduct.product.price }}</div>
+      <div class="col-3">
+        <div *ngIf="cartProduct" class="row">
+          <div *ngIf="cartProduct" (click)="removeQuantity()" class="icon-remove mr-3"> - </div>
+          <div *ngIf="cartProduct" class="icon-default"> | </div>
+          <div *ngIf="cartProduct" (click)="addQuantity()" class="icon-add ml-3"> + </div>
+        </div>
+      </div>
+      <div *ngIf="cartProduct" class="col-2 icon-remove" (click)="removeFromCart()"><i
+          class="fa fa-trash"></i></div>
+    </div>
+  </div>
+</div>

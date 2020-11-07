@@ -1,10 +1,10 @@
 <div id="landing" class="page-header" data-parallax="true" style="background-image: url('./assets/img/woodWork.jpg');">
-    <div class="filter"></div>
-    <div class="container">
-        <div class="row justify-content-center" *ngIf="product">
-            <div class="col-10 card-product">
+    <div class="filter mt-5"></div>
+    <div class="container mt-5">
+        <div class="row justify-content-center mt-5" *ngIf="product">
+            <div class="col-10 card-product mt-5">
                 <div class="row justify-content-center mt-5">
-                    <div class="col-6">
+                    <div class="col-6"> 
                         <div id="firstProductImages" class="carousel slide" data-ride="carousel">
                             <ul class="carousel-indicators">
                                 <li data-target="#firstProductImages" *ngFor="let image of product.images; index as i"

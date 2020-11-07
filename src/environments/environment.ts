@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   environmentName: 'Development',
-  apiUrl: 'https://kataskopos.nl/'//'https://kataskopos.nl/' http://192.168.178.33:45455/
+  apiUrl: 'http://192.168.178.33:45455/'//'https://kataskopos.nl/' http://192.168.178.33:45455/
 };
 
 /*
