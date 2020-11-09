@@ -8,7 +8,7 @@
       <div class="carousel-inner">
         <div class="carousel-item" *ngFor="let image of product.images; index as i" id="image-{{i}}"
           [ngClass]="{'active': i == 0}">
-          <img [src]="imageUrl + image.image" class="product-image-carousel" routerLink="/product/{{product.id}}">
+          <img [src]="imageUrl + image.image" class="product-image-carousel" routerLink="/product/{{product.id}}/{{product.title.replace(' ', '-').trim()}}">
           <div class="carousel-caption">
           </div>
         </div>
@@ -22,19 +22,19 @@
     </div>
   </div>
   <div class="col ml-2 mr-2" *ngIf=" product">
-    <div routerLink="/product/{{product.id}}" class="row product-tag justify-content-center">{{ product.category.name }}
+    <div routerLink="/product/{{product.id}}/{{product.title.replace(' ', '-').trim()}}" class="row product-tag justify-content-center">{{ product.category.name }}
       <div *ngIf="!product.available">Niet Beschikbaar</div>
     </div>
-    <div routerLink="/product/{{product.id}}" class="row product-title justify-content-center"
+    <div routerLink="/product/{{product.id}}/{{product.title.replace(' ', '-').trim()}}" class="row product-title justify-content-center"
       *ngIf="product.title.length >= 20">
       {{ product.title | slice:0:20}}..</div>
-    <div routerLink="/product/{{product.id}}" class="row product-title justify-content-center"
+    <div routerLink="/product/{{product.id}}/{{product.title.replace(' ', '-').trim()}}" class="row product-title justify-content-center"
       *ngIf="product.title.length < 20">
       {{ product.title}}</div>
-    <div routerLink="/product/{{product.id}}" class="row product-description justify-content-center"
+    <div routerLink="/product/{{product.id}}/{{product.title.replace(' ', '-').trim()}}" class="row product-description justify-content-center"
       *ngIf="product.description.length >= 80">
-      {{ product.description | slice:0:80}}..</div>
-    <div routerLink="/product/{{product.id}}" class="row product-description justify-content-center"
+      {{ product.description | slice:0:80 }}..</div>
+    <div routerLink="/product/{{product.id}}/{{product.title.replace(' ', '-').trim()}}" class="row product-description justify-content-center"
       *ngIf="product.description.length < 80">
       {{ product.description}}</div>
     <div class="row line mt-4">

@@ -21,6 +21,7 @@ export class ContentListComponent implements OnInit {
   @Input() materials: Material[];
   @Input() blogs: Blog[];
   @Input() references: Reference[];
+  
 
   constructor(private damService: DAMService, private footerService: FooterService) {
     this.footerService.footerSubject.next(false);
@@ -41,6 +42,8 @@ export class ContentListComponent implements OnInit {
       item.type = Type.Blog;
     } else if (type == "reference") {
       item.type = Type.Reference;
+    } else if (type == "filtertag") {
+      item.type = Type.FilterTag;
     }
 
     this.damService.currentSubject.next(item);
@@ -69,7 +72,7 @@ export class ContentListComponent implements OnInit {
   create(type: string) {
 
     if (type == "product") {
-      let product = new Product(0, "some", "some", 0, [ new ImageProduct("example.jpg"), new ImageProduct("example.jpg"), new ImageProduct("example.jpg") ], null, true);
+      let product = new Product(0, "some", "some", 0, [new ImageProduct("example.jpg"), new ImageProduct("example.jpg"), new ImageProduct("example.jpg")], null, true);
       product.type = Type.Product;
       this.products.push(product);
       this.damService.currentSubject.next(product);
@@ -88,6 +91,8 @@ export class ContentListComponent implements OnInit {
       reference.type = Type.Reference;
       this.references.push(reference);
       this.damService.currentSubject.next(reference);
+    } else if (type == "filtertag") {
+      
     }
 
 

@@ -20,24 +20,24 @@
                                 </div>
                             </div>
                             <div class="row mb-4 " *ngIf="headerProducts ">
-                                <div class="landing-image-container col" routerLink="/product/{{headerProducts[0].id}}">
+                                <div class="landing-image-container col" routerLink="/product/{{headerProducts[0].id}}/{{headerProducts[0].title.replace(' ', '-').trim()}}">
                                     <img [src]="imageUrl + headerProducts[0].images[0].image " class="landing-image ">
                                     <img [src]="imageUrl + headerProducts[0].images[0].image "
                                         class="landing-image-shadow ">
                                 </div>
-                                <div class="landing-image-container col" routerLink="/product/{{headerProducts[1].id}}">
+                                <div class="landing-image-container col" routerLink="/product/{{headerProducts[1].id}}/{{headerProducts[1].title.replace(' ', '-').trim()}}">
                                     <img [src]="imageUrl + headerProducts[1].images[0].image " class="landing-image ">
                                     <img [src]="imageUrl + headerProducts[1].images[0].image "
                                         class="landing-image-shadow ">
                                 </div>
-                                <div class="landing-image-container col" routerLink="/product/{{headerProducts[2].id}}">
+                                <div class="landing-image-container col" routerLink="/product/{{headerProducts[2].id}}/{{headerProducts[2].title.replace(' ', '-').trim()}}">
                                     <img [src]="imageUrl + headerProducts[2].images[0].image " class="landing-image ">
                                     <img [src]="imageUrl + headerProducts[2].images[0].image "
                                         class="landing-image-shadow ">
                                 </div>
                             </div>
                         </div>
-                        <a [routerLink]="[ '/contact'] " class="btn mt-4 btn-dark btn-round "
+                        <a [routerLink]="['/contact']" class="btn mt-4 btn-dark btn-round "
                             style="color:white; ">Contact</a>
                     </div>
                 </div>

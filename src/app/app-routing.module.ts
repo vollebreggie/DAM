@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactBoardComponent },
   { path: 'blog', component: BlogBoardComponent },
   { path: 'products', component: ProductsBoardComponent },
-  { path: 'product/:id', component: ProductDetailComponent },
+  { path: 'product/:id/:name', component: ProductDetailComponent },
   { path: 'login', component: LoginComponent },
   { path: 'cart', component: ShoppingBoardComponent },
   { path: 'content', component: ContentComponent , canActivate: [AuthGuard] },

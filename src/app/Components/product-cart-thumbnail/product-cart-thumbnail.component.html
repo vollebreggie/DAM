@@ -10,7 +10,7 @@
         <div class="carousel-item" *ngFor="let image of cartProduct.product.images; index as i" id="image-{{i}}"
           [ngClass]="{'active': i == 0}">
           <img [src]="imageUrl + image.image" class="product-image-carousel"
-            routerLink="/product/{{cartProduct.product.id}}">
+            routerLink="/product/{{cartProduct.product.id}}/{{cartProduct.product.title.replace(' ', '-').trim()}}">
           <div class="carousel-caption">
           </div>
         </div>
@@ -24,26 +24,17 @@
     </div>
   </div>
   <div class="col ml-2 mr-2" *ngIf="cartProduct && cartProduct.product">
-    <div routerLink="/product/{{cartProduct.product.id}}" class="row product-tag justify-content-center">
-      {{ cartProduct.product.category.name }}
-      <div *ngIf="!cartProduct.product.available">Niet Beschikbaar</div>
-    </div>
-    <div routerLink="/product/{{cartProduct.product.id}}" class="row product-title justify-content-center"
-      *ngIf="cartProduct.product.title.length >= 20">
+
+    <div routerLink="/product/{{cartProduct.product.id}}/{{cartProduct.product.title.replace(' ', '-').trim()}}"
+      class="row product-title justify-content-center" *ngIf="cartProduct.product.title.length >= 20">
       {{ cartProduct.product.title | slice:0:20}}..</div>
-    <div routerLink="/product/{{cartProduct.product.id}}" class="row product-title justify-content-center"
-      *ngIf="cartProduct.product.title.length < 20">
+    <div routerLink="/product/{{cartProduct.product.id}}/{{cartProduct.product.title.replace(' ', '-').trim()}}"
+      class="row product-title justify-content-center" *ngIf="cartProduct.product.title.length < 20">
       {{ cartProduct.product.title}}</div>
-    <div routerLink="/product/{{cartProduct.product.id}}" class="row product-description justify-content-center"
-      *ngIf="cartProduct.product.description.length >= 80">
-      {{ cartProduct.product.description | slice:0:80}}..</div>
-    <div routerLink="/product/{{cartProduct.product.id}}" class="row product-description justify-content-center"
-      *ngIf="cartProduct.product.description.length < 80">
-      {{ cartProduct.product.description}}</div>
-    <div class="row line mt-4">
+    <div class="row line mt-2">
 
     </div>
-    <div class="row mt-3">
+    <div class="row mt-2">
       <div *ngIf="cartProduct" class="col-1 product-price justify-content-center">{{ cartProduct.quantity }}x</div>
       <div class="col-5 product-price justify-content-center">€ {{ cartProduct.product.price }}</div>
       <div class="col-3">
@@ -53,8 +44,7 @@
           <div *ngIf="cartProduct" (click)="addQuantity()" class="icon-add ml-3"> + </div>
         </div>
       </div>
-      <div *ngIf="cartProduct" class="col-2 icon-remove" (click)="removeFromCart()"><i
-          class="fa fa-trash"></i></div>
+      <div *ngIf="cartProduct" class="col-2 icon-remove" (click)="removeFromCart()"><i class="fa fa-trash"></i></div>
     </div>
   </div>
 </div>

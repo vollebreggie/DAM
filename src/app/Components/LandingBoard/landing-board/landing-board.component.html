@@ -19,15 +19,15 @@
                                 </div>
                             </div>
                             <div class="row mb-4" *ngIf="products">
-                                <div class="landing-image-container col" routerLink="/product/{{products[0].id}}">
+                                <div class="landing-image-container col" routerLink="/product/{{products[0].id}}/{{products[0].title.replace(' ', '-').trim()}}">
                                     <img [src]="imageUrl + products[0].images[0].image" class="landing-image">
                                     <img [src]="imageUrl + products[0].images[0].image" class="landing-image-shadow">
                                 </div>
-                                <div class="landing-image-container col" routerLink="/product/{{products[1].id}}">
+                                <div class="landing-image-container col" routerLink="/product/{{products[1].id}}/{{products[1].title.replace(' ', '-').trim()}}">
                                     <img [src]="imageUrl + products[1].images[0].image" class="landing-image">
                                     <img [src]="imageUrl + products[1].images[0].image" class="landing-image-shadow">
                                 </div>
-                                <div class="landing-image-container col" routerLink="/product/{{products[2].id}}">
+                                <div class="landing-image-container col" routerLink="/product/{{products[2].id}}/{{products[2].title.replace(' ', '-').trim()}}">
                                     <img [src]="imageUrl + products[2].images[0].image" class="landing-image">
                                     <img [src]="imageUrl + products[2].images[0].image" class="landing-image-shadow">
                                 </div>
@@ -91,7 +91,7 @@
                                 <div class="carousel-item" *ngFor="let image of products[0].images; index as i"
                                     id="image-{{i}}" [ngClass]="{'active': i == 0}">
                                     <img [src]="imageUrl + image.image" class="product-image-carousel"
-                                        routerLink="/product/{{products[0].id}}">
+                                        routerLink="/product/{{products[0].id}}/{{products[0].title.replace(' ', '-').trim()}}">
                                     <div class="carousel-caption">
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                         </div>
                     </div>
                     <div class="product-text-right-container col-4" *ngIf="products[0]"
-                        routerLink="/product/{{products[0].id}}">
+                        routerLink="/product/{{products[0].id}}/{{products[0].title.replace(' ', '-').trim()}}">
                         <div class="row product-tag">{{ products[0].category.name }} - <div
                                 *ngIf="products[0].available"> Beschikbaar</div>
                             <div *ngIf="!products[0].available">Niet Beschikbaar</div>
@@ -122,7 +122,7 @@
                 <div animateOnScroll animationName="fade-in-right" *ngIf="products"
                     class="product-container-row row justify-content-center clicky">
                     <div class="product-text-left-container col-4" *ngIf="products[1]"
-                        routerLink="/product/{{products[1].id}}">
+                        routerLink="/product/{{products[1].id}}/{{products[1].title.replace(' ', '-').trim()}}">
                         <div class="row product-tag">{{ products[1].category.name }} - <div
                                 *ngIf="products[1].available"> Beschikbaar</div>
                             <div *ngIf="!products[1].available">Niet Beschikbaar</div>
@@ -145,7 +145,7 @@
                                 <div class="carousel-item" *ngFor="let image of products[1].images; index as i"
                                     id="image-{{i}}" [ngClass]="{'active': i == 0}">
                                     <img [src]="imageUrl + image.image" class="product-image-carousel"
-                                        routerLink="/product/{{products[1].id}}">
+                                        routerLink="/product/{{products[1].id}}/{{products[1].title}}/{{products[1].title.replace(' ', '-').trim()}}">
                                     <div class="carousel-caption">
                                     </div>
                                 </div>
@@ -171,7 +171,7 @@
                                 <div class="carousel-item" *ngFor="let image of products[2].images; index as i"
                                     id="image-{{i}}" [ngClass]="{'active': i == 0}">
                                     <img [src]="imageUrl + image.image" class="product-image-carousel"
-                                        routerLink="/product/{{products[2].id}}">
+                                        routerLink="/product/{{products[2].id}}/{{products[2].title.replace(' ', '-').trim()}}">
                                     <div class="carousel-caption">
                                     </div>
                                 </div>
@@ -185,7 +185,7 @@
                         </div>
                     </div>
                     <div class="product-text-right-container col-4" *ngIf="products[2]"
-                        routerLink="/product/{{products[2].id}}">
+                        routerLink="/product/{{products[2].id}}/{{products[2].title.replace(' ', '-').trim()}}">
                         <div class="row product-tag">{{ products[2].category.name }} - <div
                                 *ngIf="products[2].available"> Beschikbaar</div>
                             <div *ngIf="!products[2].available">Niet Beschikbaar</div>

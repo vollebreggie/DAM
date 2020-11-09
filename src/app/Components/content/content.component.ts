@@ -26,11 +26,12 @@ export class ContentComponent implements OnInit {
   material: Material;
   blog: Blog;
   reference: Reference;
+  filterTags: boolean = false;
 
   constructor(private damService: DAMService, private authenticationService: AuthenticationService) {
     damService.getLanding().subscribe(response => this.landingList = response.data);
     damService.getBlogs().subscribe(response => this.blogs = response.data);
-    damService.getMaterials().subscribe(response =>  {
+    damService.getMaterials().subscribe(response => {
       this.materials = response.data;
       console.log(this.materials);
     });
@@ -62,6 +63,7 @@ export class ContentComponent implements OnInit {
             this.material = null;
             this.blog = null;
             this.reference = null;
+            this.filterTags = false;
             break;
           case Type.Landing:
             this.landing = c;
@@ -69,6 +71,7 @@ export class ContentComponent implements OnInit {
             this.material = null;
             this.blog = null;
             this.reference = null;
+            this.filterTags = false;
             break;
           case Type.Material:
             this.material = c;
@@ -76,6 +79,7 @@ export class ContentComponent implements OnInit {
             this.landing = null;
             this.blog = null;
             this.reference = null;
+            this.filterTags = false;
             break;
           case Type.Blog:
             this.blog = c;
@@ -83,6 +87,7 @@ export class ContentComponent implements OnInit {
             this.reference = null;
             this.product = null;
             this.landing = null;
+            this.filterTags = false;
             break;
           case Type.Reference:
             this.reference = c;
@@ -90,6 +95,15 @@ export class ContentComponent implements OnInit {
             this.product = null;
             this.landing = null;
             this.blog = null;
+            this.filterTags = false;
+            break;
+          case Type.FilterTag:
+            this.reference = null;
+            this.material = null;
+            this.product = null;
+            this.landing = null;
+            this.blog = null;
+            this.filterTags = true;
             break;
           default:
             console.log("default");

@@ -5,5 +5,6 @@ export enum Type {
     Contact,
     Landing,
     Material,
-    Reference
+    Reference,
+    FilterTag
 }

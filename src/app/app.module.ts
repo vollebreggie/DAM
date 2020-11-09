@@ -35,6 +35,7 @@ import { ProductThumbnailComponent } from './Components/product-thumbnail/produc
 import { ShoppingBoardComponent } from './Components/shopping-board/shopping-board.component';
 import { ProductCartThumbnailComponent } from './Components/product-cart-thumbnail/product-cart-thumbnail.component';
 import { StripeModule } from 'stripe-angular';
+import { ContentDetailFiltertagsComponent } from './Components/content-detail-filtertags/content-detail-filtertags.component';
 
 @NgModule({
   declarations: [
@@ -61,10 +62,10 @@ import { StripeModule } from 'stripe-angular';
     CarouselComponent,
     ProductThumbnailComponent,
     ShoppingBoardComponent,
-    ProductCartThumbnailComponent
+    ProductCartThumbnailComponent,
+    ContentDetailFiltertagsComponent
   ],
   imports: [
-    StripeModule.forRoot("pk_test_51Hj4MaIuJJsbx4ge9hVsIQFMLNc4jRBPA59uivZIONAvDCzaA29UEhIhcC87nNGDBSKAdLpoWoeFAQFK7QCD41zp00aDwVRui6"),
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
