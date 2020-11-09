@@ -1,6 +1,24 @@
 <div class="top"></div>
-<div class="col">
-  <div class="row">
-    content-detail-filtertags works!
+<div class="col" *ngIf="tagForm">
+  <form [formGroup]="tagForm">
+    <div class="form-group">
+      <label for="firstName">FirstName</label>
+      <input type="text" formControlName="title" class="form-control"
+        [ngClass]="{ 'is-invalid': f.title.errors }" />
+      <div *ngIf="f.title.errors" class="invalid-feedback">
+        <div *ngIf="f.title.errors.required">title is required</div>
+      </div>
+    </div>
+    <button class="btn btn-primary" [disabled]="!tagForm.dirty" (click)="onSubmit()"><div *ngIf="!contentForm.dirty">Content up to date</div>  <div *ngIf="tagForm.dirty">Save</div></button>
+  </form>
+
+
+  <div *ngFor="let tag of tags; let i = index">
+    <div class="row" *ngIf="i % 4 == 0">
+      <div class="col">{{ tags[i].title }}</div>
+      <div class="col">{{ tags[i + 1].title }}</div>
+      <div class="col">{{ tags[i + 2].title }}</div>
+      <div class="col">{{ tags[i + 3].title }}</div>
+    </div>
   </div>
 </div>

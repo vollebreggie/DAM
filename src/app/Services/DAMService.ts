@@ -16,6 +16,8 @@ import { stringify } from 'querystring';
 import { Message } from '../Models/Message';
 import { Log } from '../Models/Log';
 import { CartProduct } from '../Models/CartProduct';
+import { FilterTag } from '../Models/FilterTag';
+import { ProductFilterTag } from '../Models/ProductFilterTag';
 
 @Injectable({ providedIn: 'root' })
 export class DAMService extends RestService<User> {
@@ -226,6 +228,8 @@ export class DAMService extends RestService<User> {
         return this.makeRequest("GET", "/addNewProductToCart/" + cartProduct.product.id);
     }
 
+
+    //Shoppingcard
     public addProductToCart(cartProduct: CartProduct): Observable<ApiResponse<CartProduct>> {
         let index = this.cart.findIndex(c => c.product.id == cartProduct.product.id);
         
@@ -268,5 +272,30 @@ export class DAMService extends RestService<User> {
 
     public getCartCount(): Observable<ApiResponse<number>> {
         return this.makeRequest("GET", "/GetCartCount");
+    }
+
+    //FilterTags
+    public addFilterTag(filterTag: FilterTag): Observable<ApiResponse<number>> {
+        return this.makeRequest("POST", "/AddFilterTag", filterTag);
+    }
+
+    public updateFilterTag(filterTag: FilterTag): Observable<ApiResponse<number>> {
+        return this.makeRequest("PUT", "/UpdateFilterTag", filterTag);
+    }
+
+    public deleteFilterTag(filterTag: FilterTag): Observable<ApiResponse<number>> {
+        return this.makeRequest("POST", "/DeleteFilterTag", filterTag);
+    }
+
+    public addProductFilterTag(productFilterTag: ProductFilterTag): Observable<ApiResponse<number>> {
+        return this.makeRequest("POST", "/AddProductFilterTag", productFilterTag);
+    }
+
+    public deleteProductFilterTag(productFilterTag: ProductFilterTag): Observable<ApiResponse<number>> {
+        return this.makeRequest("POST", "/DeleteProductFilterTag", productFilterTag);
+    }
+
+    public getFilterTags(): Observable<ApiResponse<FilterTag[]>> {
+        return this.makeRequest("GET", "/GetFilterTags");
     }
 }
