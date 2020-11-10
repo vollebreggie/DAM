@@ -3,27 +3,28 @@
     <div class="row">
         <div class="product-image-container image-input">
             <div id="demo" class="carousel slide" data-ride="carousel">
-                <ul class="carousel-indicators" >
-                  <li data-target="#demo" *ngFor="let image of images; index as i" data-slide-to="i"></li>
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" *ngFor="let image of images; index as i" data-slide-to="i"></li>
                 </ul>
                 <div class="carousel-inner">
-                    
-                  <div class="carousel-item" *ngFor="let image of images; index as i" id="image-{{i}}" [ngClass]="{'active': i == 0}">
-                    <div class="remove-image" (click)="removeImage(i)">X</div>
-                    <img [src]="url + image" alt="Los Angeles" width="1100" height="500" (click)="upload.click()">
-                    <div class="carousel-caption">
-                      <!-- <h3>Los Angeles</h3>
+
+                    <div class="carousel-item" *ngFor="let image of images; index as i" id="image-{{i}}"
+                        [ngClass]="{'active': i == 0}">
+                        <div class="remove-image" (click)="removeImage(i)">X</div>
+                        <img [src]="url + image" alt="Los Angeles" width="1100" height="500" (click)="upload.click()">
+                        <div class="carousel-caption">
+                            <!-- <h3>Los Angeles</h3>
                       <p>We had such a great time in LA!</p> -->
-                    </div>   
-                  </div>
+                        </div>
+                    </div>
                 </div>
                 <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                  <span class="carousel-control-prev-icon"></span>
+                    <span class="carousel-control-prev-icon"></span>
                 </a>
                 <a class="carousel-control-next" href="#demo" data-slide="next">
-                  <span class="carousel-control-next-icon"></span>
+                    <span class="carousel-control-next-icon"></span>
                 </a>
-              </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -77,6 +78,15 @@
             [(ngModel)]="selectedAvailable" (change)="onChange($event.target.value)">
             <option [ngValue]="available" *ngFor="let available of availables">{{available}}</option>
         </select>
+    </div>
+
+    <label for="category">Filter tags</label>
+    <div *ngFor="let tag of tags; let i = index">
+        <div class="row">
+            <div class="col" *ngFor="let t of tag; let j = index">
+                <div (click)="selectTag(i, j, t.active)" class="tag-left">{{ t.title }} </div>
+            </div>
+        </div>
     </div>
 
     <div class="form-group">

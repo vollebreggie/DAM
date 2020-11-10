@@ -6,6 +6,9 @@ import { Type } from 'src/app/Models/Enums/Type';
 import { environment } from 'src/environments/environment';
 import { Category } from 'src/app/Models/Category';
 import { ImageProduct } from 'src/app/Models/ImageProduct';
+import { FilterTag } from 'src/app/Models/FilterTag';
+import { ProductFilterTagDTO } from 'src/app/Models/ProductFilterTagDTO';
+import { ProductFilterTag } from 'src/app/Models/ProductFilterTag';
 
 @Component({
   selector: 'content-detail-product',
@@ -24,7 +27,7 @@ export class ContentDetailProductComponent implements OnInit {
   selectedCategory: Category;
   selectedAvailable: string = "Available";
   images: string[];
-
+  filterTags: ProductFilterTagDTO[][];
   availables: string[] = ["Available", "Not Available"];
 
   constructor(private formBuilder: FormBuilder, private damService: DAMService) {
@@ -35,6 +38,11 @@ export class ContentDetailProductComponent implements OnInit {
           case Type.Product:
             console.log(c);
             this.product = c;
+
+            this.damService.getFilterTagsByProduct(this.product.id).subscribe(response => {
+              this.filterTags = response.data;
+            })
+
             this.damService.getCategories().subscribe(r => {
               this.categories = r.data;
               if (this.product.category != null) {
@@ -53,10 +61,10 @@ export class ContentDetailProductComponent implements OnInit {
               description: [this.product.description, Validators.required],
               price: [this.product.price, Validators.required]
             });
-          
-            if(this.product.available) {
+
+            if (this.product.available) {
               this.selectedAvailable = "Available";
-            }else {
+            } else {
               this.selectedAvailable = "Not Available";
             }
 
@@ -88,6 +96,17 @@ export class ContentDetailProductComponent implements OnInit {
 
     this.contentForm.markAsDirty();
     this.images.splice(index, 1);
+  }
+
+  selectTag(i: number, j: number, active: boolean) {
+    this.filterTags[i][j].active = !active;
+    
+    if(this.filterTags[i][j].active) {
+      let productFilterTag: ProductFilterTag = { filterTagId: this.filterTags[i][j].id, productId: this.product.id , id: 0 };
+      this.damService.addProductFilterTag(productFilterTag).subscribe(response => console.log(response));
+    } else {
+      //this.damService.re(productFilterTag).subscribe(response => console.log(response));
+    }
   }
 
   readURL(input: HTMLInputEvent): void {
@@ -122,7 +141,7 @@ export class ContentDetailProductComponent implements OnInit {
     let imageProducts = this.images.map(image => new ImageProduct(image));
     let available = false;
 
-    if(this.selectedAvailable == "Available") {
+    if (this.selectedAvailable == "Available") {
       available = true;
     }
 

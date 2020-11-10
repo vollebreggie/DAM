@@ -18,6 +18,7 @@ import { Log } from '../Models/Log';
 import { CartProduct } from '../Models/CartProduct';
 import { FilterTag } from '../Models/FilterTag';
 import { ProductFilterTag } from '../Models/ProductFilterTag';
+import { ProductFilterTagDTO } from '../Models/ProductFilterTagDTO';
 
 @Injectable({ providedIn: 'root' })
 export class DAMService extends RestService<User> {
@@ -87,7 +88,6 @@ export class DAMService extends RestService<User> {
     }
 
     //product
-
     public search(terms: Observable<string>) {
         return terms.pipe(debounceTime(100),
             distinctUntilChanged(),
@@ -295,7 +295,11 @@ export class DAMService extends RestService<User> {
         return this.makeRequest("POST", "/DeleteProductFilterTag", productFilterTag);
     }
 
-    public getFilterTags(): Observable<ApiResponse<FilterTag[]>> {
+    public getFilterTags(): Observable<ApiResponse<FilterTag[][]>> {
         return this.makeRequest("GET", "/GetFilterTags");
+    }
+
+    public getFilterTagsByProduct(productId: number): Observable<ApiResponse<ProductFilterTagDTO[][]>> {
+        return this.makeRequest("GET", "/GetFilterTagsByProduct/" + productId);
     }
 }

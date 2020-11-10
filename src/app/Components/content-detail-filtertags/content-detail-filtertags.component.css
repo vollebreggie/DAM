@@ -2,3 +2,34 @@
 .top {
     height: 200px;
 }
+
+.tag-container {
+    width: auto;
+}
+
+.tag-left {
+    float: left;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: grey;
+    color: white;
+    padding: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 50%;
+}
+
+.tag-left:hover {
+    background-color: lightgray;
+    color: black;
+}
+
+.tag-right {
+    float: left;
+    cursor: pointer;
+    padding-top: 5px;
+}
+
+.tag-right:hover {
+    color: red;
+}

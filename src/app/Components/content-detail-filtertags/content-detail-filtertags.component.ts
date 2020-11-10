@@ -10,17 +10,17 @@ import { DAMService } from 'src/app/Services/DAMService';
 })
 export class ContentDetailFiltertagsComponent implements OnInit {
 
-  filterTags: FilterTag[];
-  selectedTag: FilterTag = { id: 0, title: ""};
+  filterTags: FilterTag[][];
+  selectedTag: FilterTag = { id: 0, title: "" };
   formData: FormData = new FormData();
   tagForm: FormGroup;
 
-  constructor(private damService: DAMService, private formBuilder: FormBuilder) { 
+  constructor(private damService: DAMService, private formBuilder: FormBuilder) {
     this.tagForm = this.formBuilder.group({
       title: ["", Validators.required]
     });
-    
-    
+
+
     this.damService.getFilterTags().subscribe(response => {
       this.filterTags = response.data;
     })
@@ -34,13 +34,16 @@ export class ContentDetailFiltertagsComponent implements OnInit {
     if (this.tagForm.invalid) {
       return;
     }
-    
-    this.damService.addFilterTag({ id: this.selectedTag.id, title: this.tagForm.value.title}).subscribe(response => {
+
+    this.damService.addFilterTag({ id: this.selectedTag.id, title: this.tagForm.value.title }).subscribe(response => {
       console.log(response);
+      this.damService.getFilterTags().subscribe(response => {
+        this.filterTags = response.data;
+      });
     });
 
     this.tagForm.markAsPristine();
-    this.tagForm.setValue({title: ""});
+    this.tagForm.setValue({ title: "" });
   }
 
   ngOnInit() { }
@@ -52,11 +55,18 @@ export class ContentDetailFiltertagsComponent implements OnInit {
     });
   }
 
-  updateFilterTag(){
+  selectTag(tagId: number, title: string) {
+    this.selectedTag = { id: tagId, title: title };
+    this.tagForm.setValue({ title: title });
+    console.log("reached");
+  }
+
+  updateFilterTag() {
     this.damService.updateFilterTag(this.selectedTag).subscribe();
   }
 
   removeFilterTag(tag: FilterTag) {
-    this.damService.deleteFilterTag(tag).subscribe();
+    console.log(tag);
+    //this.damService.deleteFilterTag(tag).subscribe();
   }
 }
