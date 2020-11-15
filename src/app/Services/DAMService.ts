@@ -19,6 +19,8 @@ import { CartProduct } from '../Models/CartProduct';
 import { FilterTag } from '../Models/FilterTag';
 import { ProductFilterTag } from '../Models/ProductFilterTag';
 import { ProductFilterTagDTO } from '../Models/ProductFilterTagDTO';
+import { Option } from '../Models/Option';
+import { OptionDTO } from '../Models/OptionDTO';
 
 @Injectable({ providedIn: 'root' })
 export class DAMService extends RestService<User> {
@@ -27,7 +29,7 @@ export class DAMService extends RestService<User> {
         this.currentSubject = new BehaviorSubject<User>(null);
         this.current = this.currentSubject.asObservable();
 
-        this.productsSubject = new BehaviorSubject<Product[]>([]);
+        this.productsSubject = new BehaviorSubject<Product[][]>([]);
         this.products = this.productsSubject.asObservable();
 
         this.materialsSubject = new BehaviorSubject<Material[]>([]);
@@ -94,15 +96,15 @@ export class DAMService extends RestService<User> {
             switchMap(term => this.getProductSearch(term)));
     }
 
-    public getProductSearch(q: string): Observable<Product[]> {
+    public getProductSearch(q: string): Observable<Product[][]> {
         if (q.length > 0) {
-            return this.makeRequest("GET", "/getProductSearch/" + q).pipe(map(r => r.data as Product[]))
+            return this.makeRequest("GET", "/getProductSearch/" + q).pipe(map(r => r.data as Product[][]))
         } else {
-            return this.makeRequest("GET", "/getProducts").pipe(map(r => r.data as Product[]));
+            return this.makeRequest("GET", "/getProducts").pipe(map(r => r.data as Product[][]));
         }
     }
 
-    public getProducts(): Observable<ApiResponse<Product[]>> {
+    public getProducts(): Observable<ApiResponse<Product[][]>> {
         return this.makeRequest("GET", "/getProducts");
     }
 
@@ -299,7 +301,31 @@ export class DAMService extends RestService<User> {
         return this.makeRequest("GET", "/GetFilterTags");
     }
 
+    public getFilterTagsBatch(count: number): Observable<ApiResponse<ProductFilterTagDTO[][]>> {
+        return this.makeRequest("GET", "/GetFilterTagsBatch/" + count);
+    }
+
     public getFilterTagsByProduct(productId: number): Observable<ApiResponse<ProductFilterTagDTO[][]>> {
-        return this.makeRequest("GET", "/GetFilterTagsByProduct/" + productId);
+        return this.makeRequest("GET", "/GetTagsFromProduct/" + productId);
+    }
+
+    public addProductOptions(productId: number, options: OptionDTO[]): Observable<ApiResponse<ProductFilterTagDTO[][]>> {
+        return this.makeRequest("POST", "/AddProductOptions/" + productId, options);
+    }
+
+    public getProductOptions(productId: number): Observable<ApiResponse<OptionDTO[]>> {
+        return this.makeRequest("GET", "/GetProductOptions/" + productId);
+    }
+
+    public getProductsFromTags(q: string, tags: ProductFilterTagDTO[]): Observable<ApiResponse<Product[][]>> {
+        return this.makeRequest("POST", "/GetProductsFromTagsAndSearch/" + q, tags);
+    }
+    
+    public getClientSecret(): Observable<ApiResponse<any>> {
+        return this.makeRequest("GET", "/GetClientSecret");
+    }
+
+    public confirmCharge(paymentId: string): Observable<ApiResponse<any>> {
+        return this.makeRequest("GET", "/ConfirmCharge/" + paymentId);
     }
 }

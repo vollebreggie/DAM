@@ -56,15 +56,19 @@ textarea {
     cursor: pointer;
     background-color: grey;
     color: white;
-    padding: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
     padding-top: 5px;
     padding-bottom: 5px;
-    border-radius: 50%;
+    border-radius: 30%;
+}
+
+.tag-active {
+    background-color: rgb(194, 194, 194);
 }
 
 .tag-left:hover {
     background-color: lightgray;
-    color: black;
 }
 
 .tag-right {
@@ -74,5 +78,15 @@ textarea {
 }
 
 .tag-right:hover {
+    color: red;
+}
+
+.remove-option {
+    cursor: pointer;
+    text-align: center;
+    font-size: 25px;
+}
+
+.remove-option:hover {
     color: red;
 }

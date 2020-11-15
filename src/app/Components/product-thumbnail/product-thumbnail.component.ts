@@ -25,6 +25,7 @@ export class ProductThumbnailComponent implements OnInit {
     this.cartProduct = new CartProduct();
     this.cartProduct.quantity = 1;
     this.cartProduct.product = this.product;
+    this.cartProduct.option = this.product.options[0];
 
     this.damService.addNewProductToCart(this.cartProduct).subscribe(response => {
       if(response.data) {

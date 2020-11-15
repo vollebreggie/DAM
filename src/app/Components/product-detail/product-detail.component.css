@@ -1,3 +1,21 @@
+.page-header {
+    max-height: none;
+}
+
+.container {
+    max-width: 90vw;
+}
+
+.content-container {
+    /* position: absolute;
+    top: 12vh; */
+    
+    height: auto;
+    margin-top: 15vh;
+    margin-bottom: 20vh;
+    /* left: 10vw; */
+}
+
 .product-image-container {
     height: 300px;
     width: 100%;
@@ -15,6 +33,10 @@
     box-shadow: 0 5px 15px -8px rgba(0, 0, 0, .24), 0 8px 10px -5px rgba(0, 0, 0, .2);
 }
 
+.carousel-inner .carousel-item img {
+    height: 500px !important;
+}
+
 .card-product {
     background-color: white;
     z-index: 5;
@@ -25,6 +47,37 @@
     cursor: pointer;
 }
 
+.center-text{
+    text-align: center;
+}
+
+.select-wood-material {
+    height: 75px;
+    width: 75px;
+    border-radius: 35%;
+    border: solid 3px rgb(207, 207, 207);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.title-option {
+    line-height: 1.55em;
+    color: grey;
+}
+
+.description-option {
+    line-height: 1.0em;
+    color: rgb(167, 167, 167);
+}
+
+.select-wood-material:hover {
+    box-shadow: 0 5px 15px -8px rgba(0, 0, 0, .24), 0 8px 10px -5px rgba(0, 0, 0, .2);
+}
+
+.selected {
+    box-shadow: 0 5px 15px -8px rgba(0, 0, 0, .24), 0 8px 10px -5px rgba(0, 0, 0, .2);
+    border: solid 3px rgb(138, 138, 161);
+}
 
 .product-image-shadow {
     transform: scale(.94);

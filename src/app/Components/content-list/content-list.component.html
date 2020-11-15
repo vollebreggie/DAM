@@ -7,12 +7,12 @@
 <div class="title-list">Products <button type="button" class="btn btn-primary right" (click)="create('product')">Create
         Product</button></div>
 <div *ngFor="let product of products">
-    <div class="row">
+    <div class="row" *ngFor="let p of product">
         <div class="col-10">
-            <div class="item-list" (click)="click(product, 'product')"> € {{product.price}} - {{product.title}}</div>
+            <div class="item-list" (click)="click(p, 'product')"> {{p.title}}</div>
         </div>
         <div class="col-2">
-            <div class="item-delete" (click)="deleteProduct(product.id)">X</div>
+            <div class="item-delete" (click)="deleteProduct(p.id)">X</div>
         </div>
     </div>
 </div>

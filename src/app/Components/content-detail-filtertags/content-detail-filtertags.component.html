@@ -13,9 +13,9 @@
     </button>
   </form>
 
-  <div *ngFor="let tag of tags; let i = index">
-    <div class="row">
-      <div class="col" *ngFor="let t of tag; let j = index">
+  <div *ngFor="let tag of filterTags; let i = index">
+    <div class="row mt-4">
+      <div class="col-1" *ngFor="let t of tag; let j = index">
         <div class="tag-container">
           <div (click)="selectTag(t.id, t.title)" class="tag-left">{{ t.title }} </div>
           <div class="tag-right" (click)="removeFilterTag(t)">X</div>

@@ -1,6 +1,7 @@
 import { Category } from './Category';
 import { Type } from './Enums/Type';
 import { ImageProduct } from './ImageProduct';
+import { Option } from './Option';
 
 export class Product {
     id: number;
@@ -11,6 +12,7 @@ export class Product {
     images: ImageProduct[];
     type: Type;
     available: boolean;
+    options: Option[];
 
     constructor(id: number = 0, title: string = "", description: string,
         price: number, images: ImageProduct[], category: Category, available: boolean) { 

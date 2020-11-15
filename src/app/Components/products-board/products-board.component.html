@@ -59,19 +59,16 @@
                 (keyup)="searchTerm$.next($event.target.value)" class="p-4">
             </ng-select>
             
-            <div *ngFor="let product of products; let i = index">
-                <div class="row justify-content-center clicky m-5" *ngIf="i % 3 == 0">
-                    <div class="col-3">
-                        <product-thumbnail [(product)]="products[i]"></product-thumbnail>
-                    </div>
-                    <div class="col-3">
-                        <product-thumbnail [(product)]="products[i + 1]"></product-thumbnail>
-                    </div>
-                    <div class="col-3">
-                        <product-thumbnail [(product)]="products[i + 2]"></product-thumbnail>
-                    </div>
-                    <div class="col-3">
-                        <product-thumbnail [(product)]="products[i + 3]"></product-thumbnail>
+            <div class="row ml-5 justify-content-center" *ngFor="let tags of filterTags; let i = index">
+                <div (click)="selectFilter(tag, i, j)" [ngClass]="{'tag-active' : tag.active}" class="tag" *ngFor="let tag of tags; let j = index">
+                    {{ tag.title }}
+                </div>
+            </div>
+
+            <div *ngFor="let batch of productsBatch; let i = index">
+                <div class="row justify-content-center clicky m-5">
+                    <div class="col-3" *ngFor="let product of batch; let i = index">
+                        <product-thumbnail [(product)]="product"></product-thumbnail>
                     </div>
                 </div>
             </div>

@@ -1,3 +1,4 @@
+import { Option } from './Option';
 import { Product } from './Product';
 import { User } from './User';
 
@@ -10,4 +11,5 @@ export class CartProduct{
     quantity: number;
     added: Date;
     bought: Date;
+    option: Option;
 }

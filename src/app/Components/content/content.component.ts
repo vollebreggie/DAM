@@ -35,7 +35,7 @@ export class ContentComponent implements OnInit {
       this.materials = response.data;
       console.log(this.materials);
     });
-    damService.getProducts().subscribe(response => this.products = response.data);
+    damService.getProducts().subscribe(response => this.products = response.data[0]);
     damService.getReferences().subscribe(response => this.references = response.data);
 
     damService.products.subscribe(p => {

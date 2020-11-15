@@ -42,7 +42,7 @@
     </div>
     <div class="row mt-3">
       <div *ngIf="cartProduct" class="col-1 product-price justify-content-center">{{ cartProduct.quantity }}x</div>
-      <div class="col-4 product-price justify-content-center">€ {{ product.price }}</div>
+      <div *ngIf="product.options.length > 0" class="col-4 product-price justify-content-center">€ {{ product.options[0].price }}</div>
       <div class="col-4">
         <div *ngIf="cartProduct" class="row">
           <div *ngIf="cartProduct" (click)="removeQuantity()" class="col-1 icon-remove">-</div>
@@ -50,7 +50,7 @@
           <div *ngIf="cartProduct" (click)="addQuantity()" class="col-1 icon-add">+</div>
         </div>
       </div>
-      <div *ngIf="!cartProduct" class="col-2 icon-add justify-content-center" (click)="addToCart()"><i
+      <div *ngIf="!cartProduct && product.options.length > 0" class="col-2 icon-add justify-content-center" (click)="addToCart()"><i
           class="fa fa-shopping-cart"></i></div>
       <div *ngIf="cartProduct" class="col-2 icon-remove justify-content-center" (click)="removeFromCart()"><i
           class="fa fa-trash"></i></div>

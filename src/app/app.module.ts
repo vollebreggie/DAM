@@ -20,7 +20,7 @@ import { ContentListComponent } from './Components/content-list/content-list.com
 import { ContentDetailsComponent } from './Components/content-details/content-details.component';
 import { ContentDetailProductComponent } from './Components/content-detail-product/content-detail-product.component';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material';
+import { MatDialogRef, MatIconModule, MAT_DIALOG_DATA } from '@angular/material';
 import { ContentDetailLandingComponent } from './Components/content-detail-landing/content-detail-landing.component';
 import { ModalComponent } from './Components/modal/modal.component';
 import { ContentDetailMaterialComponent } from './Components/content-detail-material/content-detail-material.component';
@@ -34,8 +34,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { ProductThumbnailComponent } from './Components/product-thumbnail/product-thumbnail.component';
 import { ShoppingBoardComponent } from './Components/shopping-board/shopping-board.component';
 import { ProductCartThumbnailComponent } from './Components/product-cart-thumbnail/product-cart-thumbnail.component';
-import { StripeModule } from 'stripe-angular';
 import { ContentDetailFiltertagsComponent } from './Components/content-detail-filtertags/content-detail-filtertags.component';
+import { StripeComponent } from './Components/stripe/stripe.component';
+import { ConfirmpageComponent } from './Components/confirmpage/confirmpage.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,9 @@ import { ContentDetailFiltertagsComponent } from './Components/content-detail-fi
     ProductThumbnailComponent,
     ShoppingBoardComponent,
     ProductCartThumbnailComponent,
-    ContentDetailFiltertagsComponent
+    ContentDetailFiltertagsComponent,
+    StripeComponent,
+    ConfirmpageComponent
   ],
   imports: [
     BrowserModule,
@@ -79,12 +82,13 @@ import { ContentDetailFiltertagsComponent } from './Components/content-detail-fi
     MatIconModule,
     NgbModule,
     AnimateOnScrollModule.forRoot(),
-     
-  ],
+   ],
   exports: [
     TimeAgoPipe
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

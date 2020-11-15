@@ -1,40 +1,95 @@
-<div id="landing" class="page-header" data-parallax="true" style="background-image: url('./assets/img/woodWork.jpg');">
-    <div class="filter mt-5"></div>
-    <div class="container mt-5">
-        <div class="row justify-content-center mt-5" *ngIf="product">
-            <div class="col-10 card-product mt-5">
-                <div class="row justify-content-center mt-5">
-                    <div class="col-6"> 
-                        <div id="firstProductImages" class="carousel slide" data-ride="carousel">
-                            <ul class="carousel-indicators">
-                                <li data-target="#firstProductImages" *ngFor="let image of product.images; index as i"
-                                    data-slide-to="i"></li>
-                            </ul>
-                            <div class="carousel-inner">
-                                <div class="carousel-item" *ngFor="let image of product.images; index as i"
-                                    id="image-{{i}}" [ngClass]="{'active': i == 0}">
-                                    <img [src]="imageUrl + image.image" class="product-image-carousel">
-                                    <div class="carousel-caption">
+<div class="page-header" data-parallax="true" style="background-image: url('./assets/img/woodWork.jpg');">
+    <div class="filter "></div>
+    <div class="container">
+
+        <div class="content-container justify-content-center">
+            <div class="row justify-content-center mt-5" *ngIf="product">
+                <div class="col-10 card-product mt-5">
+                    <div class="row justify-content-center mt-5">
+                        <div class="col-5 mr-5 ml-5">
+                            <div id="firstProductImages" class="carousel slide" data-ride="carousel">
+                                <ul class="carousel-indicators">
+                                    <li data-target="#firstProductImages"
+                                        *ngFor="let image of product.images; index as i" data-slide-to="i"></li>
+                                </ul>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item" *ngFor="let image of product.images; index as i"
+                                        id="image-{{i}}" [ngClass]="{'active': i == 0}">
+                                        <img [src]="imageUrl + image.image" class="product-image-carousel">
+                                        <div class="carousel-caption">
+                                        </div>
                                     </div>
                                 </div>
+                                <a class="carousel-control-prev" href="#firstProductImages" data-slide="prev">
+                                    <span class="carousel-control-prev-icon"></span>
+                                </a>
+                                <a class="carousel-control-next" href="#firstProductImages" data-slide="next">
+                                    <span class="carousel-control-next-icon"></span>
+                                </a>
                             </div>
-                            <a class="carousel-control-prev" href="#firstProductImages" data-slide="prev">
-                                <span class="carousel-control-prev-icon"></span>
-                            </a>
-                            <a class="carousel-control-next" href="#firstProductImages" data-slide="next">
-                                <span class="carousel-control-next-icon"></span>
-                            </a>
+                            <div class="product-description mt-4">{{ product.description }}</div>
+                        </div>
+                        <div class="col-6">
+
+                            <div class="row justify-content-center mt-2 ">
+                                <h1 class="product-title ">{{ product.title }} - €{{ price }}</h1>
+                            </div>
+
+
+                            <div *ngIf="dimensions.length > 0" class="row mt-4 title-option">Dimensies</div>
+                            <div *ngIf="dimensions.length > 0" class="row mt-2">
+                                <div class="col-6">
+                                    <select [(ngModel)]="selectedDimension" (change)="onChange($event)" [ngModelOptions]="{standalone: true}" class="browser-default custom-select">
+                                        <option [ngValue]="dimension" 
+                                            *ngFor="let dimension of dimensions; let i = index">Lengte {{ dimension.length}} - Breedte {{ dimension.width}}
+                                            - Hoogte {{ dimension.height}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div *ngIf="woodMaterials.length > 0" class="row mt-4 title-option">Hout soort</div>
+                            <div class="row mt-2">
+                                <div class="col-2" *ngFor="let wood of woodMaterials; let i = index">
+                                    <div class="row justify-content-center" (click)="selectWood(wood)">
+                                        <img class="select-wood-material"
+                                            [src]="url + wood.image" /></div>
+                                    <div class="row mt-1  justify-content-center description-option">{{wood.name}}</div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="stoneMaterials.length > 0" class="row mt-4 title-option">Steen soort</div>
+                            <div class="row mt-2">
+                                <div class="col-2" *ngFor="let stone of stoneMaterials; let i = index">
+                                    <div class="row justify-content-center" (click)="selectStone(stone)">
+                                        <img class="select-wood-material"
+                                        [src]="url + stone.image" />
+                                    </div>
+                                    <div class="row mt-1 justify-content-center description-option">{{ stone.name }}</div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="ironMaterials.length > 0" class="row mt-4 title-option">Metaal soort</div>
+                            <div class="row mt-2">
+                                <div class="col-2" *ngFor="let iron of ironMaterials; let i = index">
+                                    <div class="row justify-content-center" (click)="selectIron(iron)">
+                                        <img class="select-wood-material"
+                                        [src]="url + iron.image" /></div>
+                                    <div class="row mt-1 justify-content-center description-option">{{ iron.name }}</div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-5">
+                                <div *ngIf="dimensions.length > 0" class="col-3">
+                                    
+                                    <button type="button" class="btn btn-dark pl-5 pr-5"><i class="fa fa-shopping-cart"></i> </button>
+                                </div>
+                                <div class="col-3">
+                                    <button type="button" class="btn btn-dark">Neem contact op voor een bestelling</button>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                </div>
-                <div class="row justify-content-center mt-3 ">
-                    <div class="product-tags ">{{ product.category.name }} - <div *ngIf="product.available"> Beschikbaar</div><div *ngIf="!product.available"> Niet Beschikbaar</div></div>
-                </div>
-                <div class="row justify-content-center mt-2 ">
-                    <div class="product-title ">{{ product.title}}</div>
-                </div>
-                <div class="row justify-content-center p-5">
-                    <div class="product-description ">{{ product.description }}</div>
                 </div>
             </div>
         </div>

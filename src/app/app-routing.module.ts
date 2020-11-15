@@ -9,6 +9,7 @@ import { AuthGuard } from './Services/AuthGuardService';
 import { ContentComponent } from './Components/content/content.component';
 import { ProductDetailComponent } from './Components/product-detail/product-detail.component';
 import { ShoppingBoardComponent } from './Components/shopping-board/shopping-board.component';
+import { ConfirmpageComponent } from './Components/confirmpage/confirmpage.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'product/:id/:name', component: ProductDetailComponent },
   { path: 'login', component: LoginComponent },
   { path: 'cart', component: ShoppingBoardComponent },
+  { path: 'confirmed-payment', component: ConfirmpageComponent },
   { path: 'content', component: ContentComponent , canActivate: [AuthGuard] },
   //{ path: '**', component: LandingBoardComponent },
 ];

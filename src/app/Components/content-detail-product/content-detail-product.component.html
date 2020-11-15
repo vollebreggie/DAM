@@ -56,15 +56,6 @@
     </div>
 
     <div class="form-group">
-        <label for="price">Price</label>
-        <input type="number" formControlName="price" class="form-control" min="0" value="0" step=".01"
-            [ngClass]="{ 'is-invalid': f.price.errors }" />
-        <div *ngIf="f.price.errors" class="invalid-feedback">
-            <div *ngIf="f.price.errors.required">Price is required</div>
-        </div>
-    </div>
-
-    <div class="form-group">
         <label for="category">Category</label>
         <select class="browser-default custom-select" [ngModelOptions]="{standalone: true}"
             [(ngModel)]="selectedCategory" (change)="onChange($event.target.value)">
@@ -81,15 +72,16 @@
     </div>
 
     <label for="category">Filter tags</label>
-    <div *ngFor="let tag of tags; let i = index">
+    <div *ngFor="let tag of filterTags; let i = index">
         <div class="row">
-            <div class="col" *ngFor="let t of tag; let j = index">
-                <div (click)="selectTag(i, j, t.active)" class="tag-left">{{ t.title }} </div>
+            <div class="col-1" *ngFor="let t of tag; let j = index">
+                <div (click)="selectTag(i, j, t.active)" [ngClass]="{'tag-active' : t.active}" class="tag-left">
+                    {{ t.title }} </div>
             </div>
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group mt-2">
         <label for="description">Description</label>
         <textarea formControlName="description" class="form-control" row="6 "
             [ngClass]="{ 'is-invalid': f.description.errors }"></textarea>
@@ -98,10 +90,95 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="row">Options</div>
+    <div class="row" *ngIf="materials.length > 0">
+        <div class="col-3">
+            <div class="form-group">
+                <label for="category">Material</label>
+                <select class="browser-default custom-select" [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="selectedMaterial" (change)="onChangeMaterial($event.target.value)">
+                    <option [ngValue]="material" *ngFor="let material of materials">{{material.name}} - {{material.category.name}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row"><button type="button" class="btn btn-primary" (click)="addMaterial()">Add Material</button></div>
+    <div *ngIf="options.length > 0" class="row mt-4 mb-3">
+        <div class="col-2">
+            <div class="form-group">
+                <label for="title">Lengte</label>
+                <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="length" class="form-control" />
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-group">
+                <label for="title">Breedte</label>
+                <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="width" class="form-control" />
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-group">
+                <label for="title">Hoogte</label>
+                <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="height" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div *ngIf="options.length > 0" class="row"><button type="button" (click)="addDimensions()" class="btn btn-primary">Add Dimension</button></div>
+    
+    <div class="row mt-2" *ngFor="let option of options; let i = index">
+        <div class="col-1">
+            <div class="form-group">
+                <label for="title">Prijs</label>
+                <input (keyup)="updatePrice(i, $event.target.value)" value="{{options[i].price}}" type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-1" *ngIf="option.dimension">
+            <div class="form-group">
+                <label for="title">Lengte</label>
+                <input disabled type="text" value="{{option.dimension.length}}" class="form-control" />
+            </div>
+        </div>
+        <div class="col-1" *ngIf="option.dimension">
+            <div class="form-group">
+                <label for="title">Breedte</label>
+                <input disabled type="text" value="{{option.dimension.width}}" class="form-control" />
+            </div>
+        </div>
+        <div class="col-1" *ngIf="option.dimension">
+            <div class="form-group">
+                <label for="title">Hoogte</label>
+                <input disabled type="text" value="{{option.dimension.height}}" class="form-control" />
+            </div>
+        </div>
+        <div class="col-2" *ngIf="option.materialWood">
+            <div class="form-group">
+                <label for="title">Wood</label>
+                <input disabled type="text" value="{{option.materialWood.name}}" class="form-control" />
+            </div>
+        </div>
+        <div class="col-2" *ngIf="option.materialStone">
+            <div class="form-group" >
+                <label for="title">Steen</label>
+                <input disabled type="text" value="{{option.materialStone.name}}" class="form-control" />
+            </div>
+        </div>
+        <div class="col-2" *ngIf="option.materialIron">
+            <div class="form-group">
+                <label for="title">Ijzer</label>
+                <input disabled type="text" value="{{option.materialIron.name}}" class="form-control" />
+            </div>
+        </div>
+        <div class="col-1 remove-option pt-4" (click)="removeOption(i)">
+            X
+        </div>
+    </div>
+    
+    <div  class="form-group mt-5">
         <button [disabled]="!contentForm.dirty" type="button" class="btn btn-primary" (click)="onSubmit()">
             <div *ngIf="contentForm.dirty">Save</div>
             <div *ngIf="!contentForm.dirty">Content up to date</div>
         </button>
     </div>
+
+   
 </form>

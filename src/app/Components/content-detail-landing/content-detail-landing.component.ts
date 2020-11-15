@@ -50,7 +50,7 @@ export class ContentDetailLandingComponent implements OnInit {
 
     this.damService.getProducts().subscribe(p => {
 
-      this.products = p.data;
+      this.products = p.data[0];
     });
   }
 

@@ -44,7 +44,7 @@ export class LandingBoardComponent implements OnInit {
 
     this.damService.getProducts().subscribe(r => {
       console.log(r);
-      this.products = r.data;
+      this.products = r.data[0];
     });
     this.damService.getStoneMaterials().subscribe(r => this.stoneMaterials = r.data);
     this.damService.getWoodMaterials().subscribe(r => this.woodMaterials = r.data);
@@ -163,7 +163,7 @@ export class LandingBoardComponent implements OnInit {
         break;
       default:
         this.woodTitle = "Houten Materialen";
-        this.woodMaterial = "Zweef over een plaatje heen voor meer informatie";
+        this.woodMaterial = "Zweef over een plaatje voor meer informatie";
     }
   }
 
@@ -187,7 +187,7 @@ export class LandingBoardComponent implements OnInit {
         break;
       default:
         this.woodTitle = "Stenen materialen";
-        this.woodMaterial = "Zweef over een plaatje heen voor meer informatie";
+        this.woodMaterial = "Zweef over een plaatje voor meer informatie";
     }
   }
 

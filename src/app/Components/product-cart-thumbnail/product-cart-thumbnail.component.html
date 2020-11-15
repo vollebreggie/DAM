@@ -26,17 +26,17 @@
   <div class="col ml-2 mr-2" *ngIf="cartProduct && cartProduct.product">
 
     <div routerLink="/product/{{cartProduct.product.id}}/{{cartProduct.product.title.replace(' ', '-').trim()}}"
-      class="row product-title justify-content-center" *ngIf="cartProduct.product.title.length >= 20">
-      {{ cartProduct.product.title | slice:0:20}}..</div>
+      class="row product-title justify-content-center" *ngIf="cartProduct.product.title.length >= 15">
+      {{ cartProduct.product.title | slice:0:15}}..</div>
     <div routerLink="/product/{{cartProduct.product.id}}/{{cartProduct.product.title.replace(' ', '-').trim()}}"
-      class="row product-title justify-content-center" *ngIf="cartProduct.product.title.length < 20">
+      class="row product-title justify-content-center" *ngIf="cartProduct.product.title.length < 15">
       {{ cartProduct.product.title}}</div>
     <div class="row line mt-2">
 
     </div>
     <div class="row mt-2">
       <div *ngIf="cartProduct" class="col-1 product-price justify-content-center">{{ cartProduct.quantity }}x</div>
-      <div class="col-5 product-price justify-content-center">€ {{ cartProduct.product.price }}</div>
+      <div class="col-5 product-price justify-content-center">€ {{ cartProduct.option.price }}</div>
       <div class="col-3">
         <div *ngIf="cartProduct" class="row">
           <div *ngIf="cartProduct" (click)="removeQuantity()" class="icon-remove mr-3"> - </div>

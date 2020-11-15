@@ -7,11 +7,8 @@
           <div class="row justify-content-center clicky m-5">
             <div class="row mt-5" *ngIf="cartProducts.length == 0">
               Your shoppingcard is empty
-              <!-- <stripe-bank #stripeBank (catch)="$event" [(token)]="token" [(invalid)]="invalidError">
-                </stripe-card>
-
-                <button type="button" (click)="stripeBank.createToken({...bank_account...})">createToken</button> -->
             </div>
+            <stripe></stripe>
             <div class="col-3">
               <product-cart-thumbnail *ngIf="cartProducts[0]" [(cartProduct)]="cartProducts[0]">
               </product-cart-thumbnail>
@@ -32,7 +29,7 @@
               <div class="row line mb-3"></div>
               <div class="row mb-2" *ngFor="let cartProduct of cartProducts; let i = index">
                 <div class="col-8">{{ cartProduct.product.title }}</div>
-                <div class="col-4"> € {{ cartProduct.product.price }}</div>
+                <div class="col-4"> € {{ cartProduct.option.price }}</div>
               </div>
               <div class="row line mt-3"></div>
               <div class="row mt-3">
